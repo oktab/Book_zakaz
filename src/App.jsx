@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import Home from './Components/Home/Home.jsx';
-import Book from './Components/Book/Book.jsx';
-import './i18.js';
+import Books from './Components/Book/Books.jsx';
 function App() {
 
   return (
     <>
-      
+        <Books />
+
     </>
   )
 }
