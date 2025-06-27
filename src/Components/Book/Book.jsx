@@ -1,5 +1,5 @@
 import React from 'react'
-import './../../i18.js';
+import '../../i18n.js';
 function Book() {
   return (
     <div>
