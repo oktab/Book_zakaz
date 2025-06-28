@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import location from './../../../assets/location.png';
-
+import location from './../../../assets/img/location.png';
 function Location() {
     const { t } = useTranslation();
 

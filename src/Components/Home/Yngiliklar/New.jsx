@@ -1,14 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import card1 from './../../../assets/card1.png';
-import card2 from './../../../assets/card2.png';
-import card3 from './../../../assets/card3.png';
-import card4 from './../../../assets/card4.png';
-import card5 from './../../../assets/card5.png';
-import card6 from './../../../assets/card6.png';
-import card7 from './../../../assets/card7.png';
-import card8 from './../../../assets/card8.png';
+import card1 from './../../../assets/img/card1.png';
+import card2 from './../../../assets/img/card2.png';
+import card3 from './../../../assets/img/card3.png';
+import card4 from './../../../assets/img/card4.png';
+import card5 from './../../../assets/img/card5.png';
+import card6 from './../../../assets/img/card6.png';
+import card7 from './../../../assets/img/card7.png';
+import card8 from './../../../assets/img/card8.png';
 
 function New() {
     const { t } = useTranslation();
