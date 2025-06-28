@@ -3,7 +3,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import imgCard from './../../assets/img/BookIMG.png';
 import locationImg from './../../assets/img/LocationIMG.png';
 import Pagination from '../../Components/pogination/pogination';
-import Rahbariat from '../Rahbariat';
+import Rahbariat from '../Rahbariyat/Rahbariat';
 
 function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
