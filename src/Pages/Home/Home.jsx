@@ -15,7 +15,7 @@ import uzb from './../../assets/img/uzb.png';
 import logo from './../../assets/img/logo.png';
 import BgImg from './../../assets/img/BgImg.png';
 
-import '@fontsource/inter';
+
 
 // Lang options with flag and text
 const langOptions = [
