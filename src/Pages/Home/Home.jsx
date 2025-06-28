@@ -78,7 +78,10 @@ const Home = () => {
                         <Select
                             options={langOptions}
                             defaultValue={langOptions.find(opt => opt.value === i18n.language)}
-                            onChange={(selectedOption) => i18n.changeLanguage(selectedOption.value)}
+                            onChange={(selectedOption) => {
+                                i18n.changeLanguage(selectedOption.value);
+                                localStorage.setItem('i18nextLng', selectedOption.value);
+                            }}
                             className="text-black font-inter"
                             isSearchable={false}
                             styles={{
