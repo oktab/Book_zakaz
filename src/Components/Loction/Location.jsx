@@ -8,16 +8,13 @@ function Location() {
         <div className="max-w-[1177px] w-full h-[481px] mx-auto">
             <div className="flex items-center justify-between pt-[50px]">
                 <div className="relative w-[577px] h-[478px] rounded-md overflow-hidden">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center rounded-[24px]"
-                        style={{ backgroundImage: `url(${location})` }}
-                    ></div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11968.210470783546!2d69.29967315!3d41.41637645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef323741fc927%3A0xd4c294debb101a51!2sBO&#39;YIN.UZ%20CHOYHONA!5e0!3m2!1sru!2s!4v1751094645071!5m2!1sru!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     <h1 className="absolute top-4 left-4 text-3xl font-bold text-black font-inte px-2 py-1">
                         {t('location_title')}
                     </h1>
                 </div>
 
-                <div className="bg-[#1E3A8A] w-[577px] h-[478px] rounded-md text-center">
+                <div className="bg-[#1E3A8A] w-[577px] py-10 rounded-md text-center">
                     <h1 className="text-4xl font-bold text-white pt-[20px] whitespace-pre-line">
                         {t('location_form_title')}
                     </h1>

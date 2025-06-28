@@ -70,23 +70,6 @@ function BooksSection() {
           <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
           {/* <p className="text-sm text-gray-500 mt-2">(Свайпай yoki bos)</p> */}
         </div>
-
-        {/* Блок с формой */}
-        <div className='w-[1230px] mx-auto mt-[61px] flex justify-between text-white'>
-          <img src={locationImg} className='w-[641px] h-[481px] rounded-[24px]' alt="" />
-          <div className='w-[577px] h-[478px] bg-[#1E3A8A] rounded-[10px] flex justify-center items-center'>
-            <div className='w-[444px]'>
-              <h2 className='text-center text-[40px] font-[600]'>Savollaringiz bo’lsa qoldiring</h2>
-              <h2 className='text-[28px] font-[600] text-center'>Biz siz bilan bog’lanamiz</h2>
-              <div className='w-[444px] flex flex-wrap gap-[20px] mt-[20px]'>
-                <input type="text" className='w-[444px] h-[47px] bg-white pl-[22px] border-[#1E3A8A33] border text-black rounded-[10px] focus:outline-0' placeholder='Ismingiz kiriting' />
-                <input type="text" className='w-[444px] h-[47px] bg-white pl-[22px] border-[#1E3A8A33] border text-black rounded-[10px] focus:outline-0' placeholder='+998-(90)-123 -45-56' />
-                <textarea className='w-[444px] h-[77px] bg-white pl-[22px] pt-[14px] border-[#1E3A8A33] border text-black rounded-[10px] content-start focus:outline-0' placeholder='Savolingizni kiriting'></textarea>
-                <button className='bg-[#098C81] text-white rounded-[10px] w-[444px] h-[47px] text-[24px] font-[600]'>Jo’natish</button>
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     </>
   );
