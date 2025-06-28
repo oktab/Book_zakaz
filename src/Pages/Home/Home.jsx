@@ -4,10 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Select from 'react-select';
 
 import './../../i18n.js';
-import New from '../../Components/Yangiliklar/New.jsx';
+import Yangiliklar from './../../Components/Yangiliklar/New.jsx';
 import Book from './../Book/Books.jsx';
-import Location from '../../Components/Loction/Location.jsx';
-import Footer from '../../Components/Footer/Footer.jsx';
+import Location from './../../Components/Loction/Location.jsx';
+import Footer from './../../Components/Footer/Footer.jsx';
 
 import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
@@ -148,7 +148,7 @@ const Home = () => {
                                 exit={{ opacity: 0, y: 30 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <New />
+                                <Yangiliklar />
                             </motion.div>
 
                             {/* Location */}
