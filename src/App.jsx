@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import Books from './Components/Book/Books.jsx';
+import Home from './Pages/Home/Home.jsx';
+import './i18n.js';
 function App() {
 
   return (
     <>
-        <Books />
-
+      <Home/>
     </>
   )
 }

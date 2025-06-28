@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 
-const Pogination = ({ currentPage, totalPages, onPageChange }) => {
-    const containerRef = useRef(null);
+const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+ const containerRef = useRef(null);
 
-  const handleSwipe = () => {
+  useEffect(() => {
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -19,7 +19,7 @@ const Pogination = ({ currentPage, totalPages, onPageChange }) => {
         if (deltaX > 0 && currentPage < totalPages) {
           onPageChange(currentPage + 1);
         } else if (deltaX < 0 && currentPage > 1) {
-          onPageChange(currentPage - 1); 
+          onPageChange(currentPage - 1);
         }
       }
     };
@@ -32,9 +32,7 @@ const Pogination = ({ currentPage, totalPages, onPageChange }) => {
       container.removeEventListener("touchstart", handleTouchStart);
       container.removeEventListener("touchend", handleTouchEnd);
     };
-  };
-
-  useEffect(handleSwipe, [currentPage]);
+  }, [currentPage, totalPages, onPageChange]);
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
@@ -68,4 +66,4 @@ const Pogination = ({ currentPage, totalPages, onPageChange }) => {
   );
 };
 
-export default Pogination;
+export default Pagination;
