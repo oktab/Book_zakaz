@@ -1,15 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import insta from './../../../assets/img/insta.png';
-import telegram from './../../../assets/img/telegram.png';
-import YouTube from './../../../assets/img/YouTube.png';
-import iks from './../../../assets/img/iks.png';
-import FaceBook from './../../../assets/img/FaceBook.png';
+import insta from './../../assets/img/insta.png';
+import telegram from './../../assets/img/telegram.png';
+import YouTube from './../../assets/img/YouTube.png';
+import iks from './../../assets/img/iks.png';
+import FaceBook from './../../assets/img/FaceBook.png';
 
-import img1 from './../../../assets/img/FooterImg1.png';
-import img2 from './../../../assets/img/FooterImg2.png';
-import img3 from './../../../assets/img/FooterImg3.png';
+import img1 from './../../assets/img/FooterImg1.png';
+import img2 from './../../assets/img/FooterImg2.png';
+import img3 from './../../assets/img/FooterImg3.png';
+import { Link } from 'react-router';
 
 function Footer() {
     const { t } = useTranslation();
@@ -18,7 +19,7 @@ function Footer() {
         <>
             <div className="bg-[#1E3A8A] mt-[100px] rounded-tl-[50px] rounded-tr-[50px] h-[355px]">
                 <div className="max-w-[1177px] w-full mx-auto h-full">
-                    <div className="flex items-center justify-between h-full py-[50px]">
+                    <div className="flex items-center justify-between h-full">
                         {/* Chap blok */}
                         <div>
                             <h1 className="text-3xl text-white font-bold">{t('footer_title')}</h1>
@@ -38,10 +39,10 @@ function Footer() {
 
                         {/* O'rta blok */}
                         <div>
-                            <h1 className="text-white text-3xl pt-[20px] cursor-pointer">{t('home')}</h1>
-                            <h1 className="text-white text-3xl pt-[20px] cursor-pointer">{t('news')}</h1>
-                            <h1 className="text-white text-3xl pt-[20px] cursor-pointer">{t('books')}</h1>
-                            <h1 className="text-white text-3xl pt-[20px] cursor-pointer">{t('about_us')}</h1>
+                            <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/">{t('home')}</Link></li>
+                            <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/news">{t('news')}</Link></li>
+                            <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/books">{t('books')}</Link></li>
+                            <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/managment">{t('rahbariyat')}</Link></li>
                         </div>
 
                         {/* O'ng blok */}
