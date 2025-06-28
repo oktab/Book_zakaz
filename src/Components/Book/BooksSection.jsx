@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoMdHeartEmpty } from "react-icons/io";
 import imgCard from './../../assets/Rectangle 3.png';
 import locationImg from './../../assets/Снимок экрана 2025-06-27 154032.png';
+import Pogination from '../pogination/pogination';
 
 function BooksSection() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 5;
   return (
     <>
         <section>
@@ -222,8 +225,11 @@ function BooksSection() {
                  </div>
                  
             </div>
-
-
+      {/* <p className="mb-4 text-xl font-semibold">Current Page: {currentPage}</p> */}
+        <div className='flex justify-end mt-[20px] w-[1230px] mx-auto'>
+            <Pogination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+        </div>
+      {/* <p className="text-sm text-gray-500 mt-2">(Свайпай влево или вправо)</p> */}
             <div className='w-[1230px] mx-auto mt-[61px] flex justify-between text-white'>
                 <img src={locationImg} className='w-[641px] h-[481px] rounded-[24px]' alt="" />
                 <div className='w-[577px] h-[478px] bg-[#1E3A8A] rounded-[10px] flex justify-center items-center'>
