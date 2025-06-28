@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import card1 from './../../../assets/img/card1.png';
+import card1 from '../../assets/img/card1.png';
 import card2 from './../../../assets/img/card2.png';
 import card3 from './../../../assets/img/card3.png';
 import card4 from './../../../assets/img/card4.png';
