@@ -1,15 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import insta from './../../../assets/img/insta.png';
-import telegram from './../../../assets/img/telegram.png';
-import YouTube from './../../../assets/img/YouTube.png';
-import iks from './../../../assets/img/iks.png';
-import FaceBook from './../../../assets/img/FaceBook.png';
+import insta from './../../assets/img/insta.png';
+import telegram from './../../assets/img/telegram.png';
+import YouTube from './../../assets/img/YouTube.png';
+import iks from './../../assets/img/iks.png';
+import FaceBook from './../../assets/img/FaceBook.png';
 
-import img1 from './../../../assets/img/FooterImg1.png';
-import img2 from './../../../assets/img/FooterImg2.png';
-import img3 from './../../../assets/img/FooterImg3.png';
+import img1 from './../../assets/img/FooterImg1.png';
+import img2 from './../../assets/img/FooterImg2.png';
+import img3 from './../../assets/img/FooterImg3.png';
 
 function Footer() {
     const { t } = useTranslation();
