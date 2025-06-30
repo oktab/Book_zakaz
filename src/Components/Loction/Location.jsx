@@ -12,10 +12,10 @@ function Location() {
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11968.210470783546!2d69.29967315!3d41.41637645!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38aef323741fc927%3A0xd4c294debb101a51!2sBO&#39;YIN.UZ%20CHOYHONA!5e0!3m2!1sru!2s!4v1751094645071!5m2!1sru!2s"
                         width="600"
                         height="650"
-                        style={{ border: 0 }}                 // ✅ style как объект
-                        allowFullScreen                      // ✅ просто как булевый атрибут
+                        style={{ border: 0 }}             
+                        allowFullScreen                      
                         loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade" // ✅ camelCase
+                        referrerPolicy="no-referrer-when-downgrade" 
                     ></iframe>
                     <h1 className="absolute top-4 left-4 text-3xl font-bold text-black font-inte px-2 py-1">
                         {t('location_title')}
@@ -39,7 +39,7 @@ function Location() {
                             placeholder={t('location_form_phone')}
                         /> <br />
                         <textarea
-                            className="bg-white rounded-md pl-[10px] w-[444px] h-[77px] mt-[10px]"
+                            className="bg-white resize-none rounded-md pl-[10px] w-[444px] h-[77px] mt-[10px]"
                             placeholder={t('location_form_question')}
                         ></textarea> <br />
                         <button className="text-white bg-[#098C81] w-[444px] h-[47px] rounded-md mt-[10px]">
