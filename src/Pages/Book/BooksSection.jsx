@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
 import imgCard from './../../assets/img/BookIMG.png';
 import locationImg from './../../assets/img/LocationIMG.png';
@@ -9,17 +9,28 @@ function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 6;
 
-  // Пример массива книг
-  const books = Array(30).fill({
-    title: "Ernest Jeminguey, To’qchilik va yo’qchilik",
-    format: "PDF",
-    pages: 123,
-    image: imgCard
-  });
+  const [books, setBooks] = useState([])
 
-  const totalPages = Math.ceil(books.length / booksPerPage);
-  const startIndex = (currentPage - 1) * booksPerPage;
-  const selectedBooks = books.slice(startIndex, startIndex + booksPerPage);
+  const urlApi = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=1&limit=10`
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const res = await fetch(urlApi)
+        const data = await res.json()
+        setBooks(data.data)
+
+        console.log(data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchBooks()
+  }, [])
+
+  // const totalPages = Math.ceil(books.length / booksPerPage);
+  // const startIndex = (currentPage - 1) * booksPerPage;
+  // const selectedBooks = books.slice(startIndex, startIndex + booksPerPage);
 
   return (
     <>
@@ -43,12 +54,11 @@ function BooksSection() {
           </div>
         </div>
 
-        {/* Карточки книг */}
         <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
-          {selectedBooks.map((book, index) => (
-            <div key={index} style={{ boxShadow: '3px 4px 10px 2px #00000040' }} className='w-[300px] h-[501px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px]'>
+          {books.map((book, index) => (
+            <div key={index} style={{ boxShadow: '3px 4px 10px 2px #00000040' }} className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px]'>
               <div>
-                <img src={book.image} alt="" />
+                <img src={book.image} alt={book.title} />
                 <div className='pl-[8px]'>
                   <h2 className='text-[20px] text-[#202020] font-[700]'>{book.title}</h2>
                   <div className='flex justify-between mt-[15px]'>
@@ -65,11 +75,9 @@ function BooksSection() {
           ))}
         </div>
 
-        {/* Пагинация со свайпом */}
-        <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage}/>
-          {/* <p className="text-sm text-gray-500 mt-2">(Свайпай yoki bos)</p> */}
-        </div>
+        {/* <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
+          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+        </div> */}
       </section>
     </>
   );
