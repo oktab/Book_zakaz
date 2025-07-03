@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
-import imgCard from './../../assets/img/BookIMG.png';
-import locationImg from './../../assets/img/LocationIMG.png';
 import Pagination from '../../Components/pogination/pogination';
-import Rahbariat from '../Rahbariyat/Rahbariat';
+import { motion } from 'framer-motion';
 
 function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,9 +50,17 @@ return (
 
         <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
           {books.map((book, index) => (
-            <div key={index} style={{ boxShadow: '3px 4px 10px 2px #00000040' }} className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px]'>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              style={{ boxShadow: '3px 4px 10px 2px #00000040' }}
+              className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px] bg-white'
+            >
               <div>
-                <img src={book.image} alt={book.title} />
+                <img src={book.image} alt={book.title} className='rounded-[10px]' />
                 <div className='pl-[8px]'>
                   <h2 className='text-[20px] text-[#202020] font-[700]'>{book.title}</h2>
                   <div className='flex justify-between mt-[15px]'>
@@ -64,10 +70,12 @@ return (
                     </div>
                     <IoMdHeartEmpty className='w-[30px] h-[30px]' />
                   </div>
-                  <button className='bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]'>Yuklab Olish</button>
+                  <button className='bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]'>
+                    Yuklab Olish
+                  </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
@@ -79,6 +87,8 @@ return (
       </section>
     </>
   );
+
+
 }
 
 export default BooksSection;
