@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputMask } from 'primereact/inputmask';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
-import 'primereact/resources/primereact.min.css';
 import { IMaskInput } from "react-imask";
 function Location() {
     const { t } = useTranslation();
@@ -27,7 +24,6 @@ function Location() {
                     </h1>
                 </div>
 
-                {/* Forma */}
                 <div className="bg-[#1E3A8A] w-full md:w-[577px] p-7 rounded-md text-center">
                     <h1 className="text-3xl md:text-4xl font-bold text-white whitespace-pre-line">
                         {t('location_form_title')}
