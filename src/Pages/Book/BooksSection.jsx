@@ -18,7 +18,7 @@ function BooksSection() {
       const res = await fetch(url);
       const data = await res.json();
       setBooks(data.data);
-      setTotalPages(data.totalPages || 1);
+      setTotalPages(data.totalPages);
     } catch (error) {
       console.error('Xatolik:', error);
     }
