@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import location from './../../assets/img/location.png';
+import { InputMask } from 'primereact/inputmask';
+import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/primereact.min.css';
 import { IMaskInput } from "react-imask";
 function Location() {
     const { t } = useTranslation();
@@ -25,15 +27,19 @@ function Location() {
                     </h1>
                 </div>
 
-                <div className="bg-[#1E3A8A] w-[577px] py-10 rounded-md text-center">
-                    <h1 className="text-4xl font-bold text-white pt-[20px] whitespace-pre-line">
+                {/* Forma */}
+                <div className="bg-[#1E3A8A] w-full md:w-[577px] p-7 rounded-md text-center">
+                    <h1 className="text-3xl md:text-4xl font-bold text-white whitespace-pre-line">
                         {t('location_form_title')}
                     </h1>
-                    <h1 className="text-3xl text-white pt-[20px]">{t('location_form_subtitle')}</h1>
-                    <div className="">
+                    <h2 className="text-2xl md:text-3xl text-white mt-4">
+                        {t('location_form_subtitle')}
+                    </h2>
+
+                    <form className="flex flex-col items-center mt-6 gap-3 w-full max-w-[444px] mx-auto">
                         <input
                             type="text"
-                            className="bg-white rounded-md pl-[10px] w-[444px] h-[47px] mt-[20px]"
+                            className="bg-white rounded-md pl-[10px] w-full h-[47px] text-black"
                             placeholder={t('location_form_name')}
                         />
 
@@ -44,15 +50,6 @@ function Location() {
                             placeholder="+998 (__) ___-__-__"
                             className="bg-white rounded-md pl-[10px] w-[444px] h-[47px] mt-[10px]"
                         />
-
-
-                        {/* <input
-                            type="number"
-                            className="bg-white rounded-md pl-[10px] w-[444px] h-[47px] mt-[10px]"
-
-                        /> */}
-
-                        {/*  placeholder={t('location_form_phone')} */}
                         <textarea
                             className="bg-white resize-none rounded-md pl-[10px] w-[444px] h-[77px] mt-[10px]"
                             placeholder={t('location_form_question')}
@@ -60,7 +57,7 @@ function Location() {
                         <button className="text-white bg-[#098C81] w-[444px] h-[47px] rounded-md mt-[10px]">
                             {t('location_form_button')}
                         </button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

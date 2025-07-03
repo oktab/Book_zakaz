@@ -10,9 +10,9 @@ import uzb from './../../assets/img/uzb.png';
 import logo from './../../assets/img/logo.png';
 
 const langOptions = [
+  { value: 'uz', label: <div className="flex items-center gap-2"><img src={uzb} alt="O'zbekcha" className="w-6 h-6 rounded-full" /><span>O’zbekча</span></div> },
   { value: 'en', label: <div className="flex items-center gap-2"><img src={eng} alt="English" className="w-6 h-6 rounded-full" /><span>English</span></div> },
-  { value: 'ru', label: <div className="flex items-center gap-2"><img src={rus} alt="Русский" className="w-6 h-6 rounded-full" /><span>Русский</span></div> },
-  { value: 'uz', label: <div className="flex items-center gap-2"><img src={uzb} alt="O'zbekcha" className="w-6 h-6 rounded-full" /><span>O’zbekча</span></div> }
+  { value: 'ru', label: <div className="flex items-center gap-2"><img src={rus} alt="Русский" className="w-6 h-6 rounded-full" /><span>Русский</span></div> }
 ];
 
 const Header = () => {
