@@ -22,7 +22,13 @@ const Header = () => {
     <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
       <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Logo" />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              className="cursor-pointer" // тоже можно для стиля
+            />
+          </Link>
           <h1 className="text-2xl leading-tight">
             Tuproqqal’a tumani <br /> Axborot kutubxona <br /> markazi
           </h1>
