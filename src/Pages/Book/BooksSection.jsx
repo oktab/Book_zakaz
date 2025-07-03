@@ -7,10 +7,10 @@ import Rahbariat from '../Rahbariyat/Rahbariat';
 
 function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
-  const limitPage = 1;
+  const limitPage = 8;
 
   const [books, setBooks] = useState([])
-  const [totalBooks, setTotalBooks] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const urlApi = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${limitPage}`
 
@@ -20,8 +20,7 @@ function BooksSection() {
         const res = await fetch(urlApi)
         const data = await res.json()
         setBooks(data.data)
-        setTotalBooks(data.totalPages)
-        console.log(data.data);
+        setTotalPages(data.totalPages)
       } catch (error) {
         console.log(error);
       }
@@ -29,9 +28,7 @@ function BooksSection() {
     fetchBooks()
   }, [currentPage])
 
-  const totalPages = Math.ceil(totalBooks / limitPage);
-
-  return (
+git  return (
     <>
       <section>
         <div className='mx-auto w-[1230px] mt-[40px]'>
@@ -74,9 +71,11 @@ function BooksSection() {
           ))}
         </div>
 
-        <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
+        {totalPages > 1 && (
+          <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+          </div>
+        )}
       </section>
     </>
   );
