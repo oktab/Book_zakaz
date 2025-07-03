@@ -3,39 +3,40 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import Pagination from '../../Components/pogination/pogination';
 import { motion } from 'framer-motion';
 
-const categories = ['All', 'Baddiy adabiyotlar', 'Rus adabiyotlar', 'O’zbek adabiyotlari', 'Prezident asarlari', 'Hikoyalar'];
-const languages = ['All', 'O’zbekcha', 'Ruscha', 'Inglizcha'];
-
 function BooksSection() {
   const [books, setBooks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
-  const limitPage = 8;
+  const [totalPages, setTotalPages] = useState(1);
+
+  const booksPerPage = 8;
+
+  const fetchBooks = async () => {
+    try {
+      const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setBooks(data.data);
+      setTotalPages(data.totalPages);
+    } catch (error) {
+      console.error('Xatolik:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${limitPage}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        setBooks(data.data);
-        setTotalPages(data.totalPages);
-      } catch (error) {
-        console.error('Xatolik:', error);
-      }
-    };
     fetchBooks();
   }, [currentPage]);
 
-  // Filtering by search, category, and language
-  const filteredBooks = books.filter((book) => {
-    const matchesSearch = book.title.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'All' || book.category === selectedCategory;
-    const matchesLanguage = selectedLanguage === 'All' || book.language === selectedLanguage;
-    return matchesSearch && matchesCategory && matchesLanguage;
+  const categories = ['All', ...new Set(books.map(book => book.category))];
+  const languages = ['All', ...new Set(books.map(book => book.language))];
+
+  const filteredBooks = books.filter(book => {
+    const byCategory = selectedCategory === 'All' || book.category === selectedCategory;
+    const byLanguage = selectedLanguage === 'All' || book.language === selectedLanguage;
+    const bySearch = book.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return byCategory && byLanguage && bySearch;
   });
 
   return (
@@ -53,6 +54,7 @@ function BooksSection() {
             }}
             className='pl-[20px] text-[18px] w-[455px] h-[50px] border-[#1E3A8A33] border rounded-[10px] focus:outline-0'
           />
+
           <select
             value={selectedCategory}
             onChange={(e) => {
@@ -65,6 +67,7 @@ function BooksSection() {
               <option key={i} value={cat}>{cat}</option>
             ))}
           </select>
+
           <select
             value={selectedLanguage}
             onChange={(e) => {
@@ -81,6 +84,7 @@ function BooksSection() {
       </div>
 
       <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
+
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
             <motion.div
@@ -93,7 +97,7 @@ function BooksSection() {
               className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px] bg-white'
             >
               <div>
-                <img src={book.image} alt={book.title} className='rounded-[10px] w-full h-[200px] object-cover' />
+                <img src={book.image} alt={book.title} className='rounded-[10px]' />
                 <div className='pl-[8px]'>
                   <h2 className='text-[20px] text-[#202020] font-[700]'>{book.title}</h2>
                   <div className='flex justify-between mt-[15px]'>
@@ -112,17 +116,17 @@ function BooksSection() {
             </motion.div>
           ))
         ) : (
-          <p className='text-center w-full text-xl mt-10'>Hech narsa topilmadi 😢</p>
+          <p className='text-center w-full text-xl mt-10'></p>
         )}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
-          <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
-        </div>
-      )}
+      <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+      </div>
     </section>
   );
+
+
 }
 
 export default BooksSection;
