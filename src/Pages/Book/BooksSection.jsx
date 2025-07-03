@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
+import Pagination from '../../Components/pogination/pogination'; // Убедись, что компонент есть!
 
 function BooksSection() {
   const [books, setBooks] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const urlApi = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all`; // 🔥 без page/limit
+  const booksPerPage = 2;
+
+  const fetchBooks = async () => {
+    try {
+      const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
+      const res = await fetch(url);
+      const data = await res.json();
+      setBooks(data.data);
+      setTotalPages(data.totalPages || 1);
+    } catch (error) {
+      console.error('Xatolik:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      try {
-        const res = await fetch(urlApi);
-        const data = await res.json();
-        setBooks(data.data);
-      } catch (error) {
-        console.error('Xatolik:', error);
-      }
-    };
     fetchBooks();
-  }, []);
+  }, [currentPage]);
 
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];
@@ -41,13 +47,19 @@ function BooksSection() {
             type="text"
             placeholder='Qidirish'
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
             className='pl-[20px] text-[18px] w-[455px] h-[50px] border-[#1E3A8A33] border rounded-[10px] focus:outline-0'
           />
 
           <select
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value);
+              setCurrentPage(1);
+            }}
             className='w-[455px] h-[50px] rounded-[10px] border-[#1E3A8A33] border focus:outline-0'
           >
             {categories.map((cat, i) => (
@@ -57,7 +69,10 @@ function BooksSection() {
 
           <select
             value={selectedLanguage}
-            onChange={(e) => setSelectedLanguage(e.target.value)}
+            onChange={(e) => {
+              setSelectedLanguage(e.target.value);
+              setCurrentPage(1);
+            }}
             className='w-[300px] h-[50px] rounded-[10px] border-[#1E3A8A33] border focus:outline-0'
           >
             {languages.map((lang, i) => (
@@ -93,6 +108,10 @@ function BooksSection() {
         ) : (
           <p className='text-center w-full text-xl mt-10'>Hech narsa topilmadi 😢</p>
         )}
+      </div>
+
+      <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
+        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
     </section>
   );
