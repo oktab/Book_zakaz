@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import location from './../../assets/img/location.png';
+import { IMaskInput } from "react-imask";
 function Location() {
   const { t } = useTranslation();
 
