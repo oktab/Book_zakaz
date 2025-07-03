@@ -1,27 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import Pagination from '../pogination/pogination';
 
 function New() {
     const { t } = useTranslation();
     const [news, setNews] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-    const newsApi = `http://13.60.234.19:5000/api/v1/news/get/all?page=1&limit=10`;
+    const limit = 8;
 
     useEffect(() => {
+        const newsApi = `http://13.60.234.19:5000/api/v1/news/get/all?page=${currentPage}&limit=${limit}`;
         fetch(newsApi)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error('Error of loading');
+                    throw new Error('Ошибка при загрузке');
                 }
                 return response.json();
             })
             .then((data) => {
                 setNews(data.data || []);
+                setTotalPages(data.totalPages || 1);
             })
             .catch((error) => {
-                console.error('Error:', error);
+                console.error('Ошибка:', error);
             });
-    }, []);
+    }, [currentPage]);
 
     return (
         <div className="max-w-[1177px] w-full mx-auto px-4">
@@ -54,6 +59,12 @@ function New() {
                     </p>
                 )}
             </div>
+
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={(page) => setCurrentPage(page)}
+            />
         </div>
     );
 }

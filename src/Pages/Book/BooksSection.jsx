@@ -28,7 +28,7 @@ function BooksSection() {
     fetchBooks()
   }, [currentPage])
 
-git  return (
+return (
     <>
       <section>
         <div className='mx-auto w-[1230px] mt-[40px]'>
