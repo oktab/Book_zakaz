@@ -55,8 +55,8 @@ const Home = () => {
                 <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
                     <div className="flex items-center gap-2">
                         <img src={logo} alt="Logo" />
-                        <h1 className="text-2xl leading-tight">
-                            Tuproqqal’a tumani <br /> Axborot kutubxona <br /> markazi
+                        <h1 className="text-2xl leading-tight w-[210px]">
+                            Tuproqqal’a tumani Axborot kutubxona  markazi
                         </h1>
                     </div>
 
@@ -114,9 +114,9 @@ const Home = () => {
                         className="bg-cover bg-center text-white flex items-center h-[900px] rounded-br-[50px] rounded-bl-[50px]"
                         style={{ backgroundImage: `url(${BgImg})` }}
                     >
-                        <div className="max-w-[1177px] mx-auto w-full text-center">
-                            <h1 className="text-white text-3xl font-bold text-center leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroTitle')}</h1>
-                            <h1 className="text-white text-3xl font-bold text-center leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroSubtitle')}</h1>
+                        <div className="max-w-[1177px] mx-auto w-full ">
+                            <h1 className="text-white text-[48px] font-bold  leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroTitle')}</h1>
+                            <h1 className="text-white w-[740px] text-[48px] mt-10 font-bold leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroSubtitle')}</h1>
                         </div>
                     </motion.section>
 

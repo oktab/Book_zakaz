@@ -17,6 +17,12 @@
     "framer-motion": "^12.19.2",
     "i18next": "^25.2.1",
     "lucide-react": "^0.523.0",
+<<<<<<< HEAD
+=======
+    "primeflex": "^4.0.0",
+    "primeicons": "^7.0.0",
+    "primereact": "^10.9.6",
+>>>>>>> d4f90c28a85806233094b857e84a53bd798a1c4d
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-i18next": "^15.5.3",

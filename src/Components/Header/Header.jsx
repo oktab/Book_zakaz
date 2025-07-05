@@ -10,9 +10,9 @@ import uzb from './../../assets/img/uzb.png';
 import logo from './../../assets/img/logo.png';
 
 const langOptions = [
+  { value: 'uz', label: <div className="flex items-center gap-2"><img src={uzb} alt="O'zbekcha" className="w-6 h-6 rounded-full" /><span>O’zbekча</span></div> },
   { value: 'en', label: <div className="flex items-center gap-2"><img src={eng} alt="English" className="w-6 h-6 rounded-full" /><span>English</span></div> },
-  { value: 'ru', label: <div className="flex items-center gap-2"><img src={rus} alt="Русский" className="w-6 h-6 rounded-full" /><span>Русский</span></div> },
-  { value: 'uz', label: <div className="flex items-center gap-2"><img src={uzb} alt="O'zbekcha" className="w-6 h-6 rounded-full" /><span>O’zbekча</span></div> }
+  { value: 'ru', label: <div className="flex items-center gap-2"><img src={rus} alt="Русский" className="w-6 h-6 rounded-full" /><span>Русский</span></div> }
 ];
 
 const Header = () => {
@@ -22,7 +22,13 @@ const Header = () => {
     <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
       <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
-          <img src={logo} alt="Logo" />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="Logo"
+              className="cursor-pointer" // тоже можно для стиля
+            />
+          </Link>
           <h1 className="text-2xl leading-tight">
             Tuproqqal’a tumani <br /> Axborot kutubxona <br /> markazi
           </h1>
