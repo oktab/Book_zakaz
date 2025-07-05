@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import Pagination from './../../Components/pogination/pogination.jsx';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
-
 function News() {
   const { t } = useTranslation();
   const [news, setNews] = useState([]);
@@ -41,7 +40,7 @@ function News() {
         {news.length > 0 ? (
           news.map((item) => (
             <Link
-              to={`/news/${item.id}`}
+              to={`/news/info/${item.id}`}
               state={{ newsItem: item }} // 🔥 Bu yerda uzatyapmiz
               key={item.id}
               className="no-underline text-inherit"
