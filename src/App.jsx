@@ -7,6 +7,7 @@ import Books from './Pages/Book/Books.jsx';
 import { Routes } from 'react-router';
 import Layout from './Pages/Layout.jsx';
 import Rahbariat from './Pages/Rahbariyat/Rahbariat.jsx';
+import NewInfo from './Pages/News/NewInfo.jsx';
 function App() {
 
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/news' element={<News />} />
+          <Route path='/news/newsinfo/:id' element={<NewInfo />} />
           <Route path='/books' element={<Books />} />
           <Route path='/managment' element={<Rahbariat />} />
         </Route>
