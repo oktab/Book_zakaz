@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Select from 'react-select';
 
 import './../../i18n.js';
-import Yangiliklar from './../../Components/Yangiliklar/New.jsx';
+import News from './../News/News.jsx';
 
 import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
@@ -129,7 +129,7 @@ const Home = () => {
                         exit={{ opacity: 0, y: 30 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Yangiliklar />
+                        <News/>
                     </motion.div>
                 </AnimatePresence>
             </main>
