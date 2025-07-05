@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
-import Pagination from '../../Components/pogination/pogination'; // Убедись, что компонент есть!
+import Pagination from '../../Components/pogination/pogination'; 
 
 function BooksSection() {
   const [books, setBooks] = useState([]);
@@ -10,7 +10,7 @@ function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const booksPerPage = 2;
+  const booksPerPage = 8;                                                                                                                                                                                 
 
   const fetchBooks = async () => {
     try {

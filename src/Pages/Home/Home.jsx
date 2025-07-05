@@ -115,8 +115,8 @@ const Home = () => {
                         style={{ backgroundImage: `url(${BgImg})` }}
                     >
                         <div className="max-w-[1177px] mx-auto w-full text-center">
-                            <h1 className="text-5xl font-bold mb-4 font-inter">{t('heroTitle')}</h1>
-                            <h1 className="text-4xl font-bold pt-5 font-inter">{t('heroSubtitle')}</h1>
+                            <h1 className="text-white text-3xl font-bold text-center leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroTitle')}</h1>
+                            <h1 className="text-white text-3xl font-bold text-center leading-snug" style={{ WebkitTextStroke: '1.5px #00c9b7' }}>{t('heroSubtitle')}</h1>
                         </div>
                     </motion.section>
 
