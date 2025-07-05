@@ -1,5 +1,5 @@
 import './i18n.js';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 import Home from './Pages/Home/Home.jsx';
 import News from './Pages/News/News.jsx';
 import Books from './Pages/Book/Books.jsx';
