@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
- const containerRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     let touchStartX = 0;
@@ -39,7 +39,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div ref={containerRef} className="flex justify-center items-center space-x-2 py-4 select-none">
       <button
-        onClick={() => onPageChange(1)}
+        onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
         className="w-10 h-10 flex justify-center items-center rounded-xl border text-teal-700 hover:bg-teal-100"
       >
         «
@@ -57,7 +57,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       ))}
 
       <button
-        onClick={() => onPageChange(totalPages)}
+        onClick={() => currentPage < totalPages && onPageChange(currentPage + 1)}
         className="w-10 h-10 flex justify-center items-center rounded-xl border text-teal-700 hover:bg-teal-100"
       >
         »
