@@ -1,4 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom'; // ✅ Link va useNavigate
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 
@@ -15,10 +16,20 @@ const langOptions = [
 
 const Header = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate(); // ✅ navigate yaratildi
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [selectedOption, setSelectedOption] = useState('');
+
+  useEffect(() => {
+    if (location.pathname !== '/akm' && location.pathname !== '/managment') {
+      setSelectedOption('');
+    }
+  }, [location.pathname]);
 
   const handleSelectChange = (e) => {
     const value = e.target.value;
+    setSelectedOption(value);
+
     if (value === 'rahbariyat') {
       navigate('/managment');
     } else if (value === 'akm') {
@@ -46,8 +57,8 @@ const Header = () => {
             <select
               id="bolim"
               name="bolim"
+              value={selectedOption}
               onChange={handleSelectChange}
-              defaultValue=""
               className="text-white text-2xl font-inter bg-blue-900 rounded px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="" disabled hidden>{t('malumot')}</option>
