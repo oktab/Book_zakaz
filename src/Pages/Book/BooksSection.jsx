@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
-import Pagination from '../../Components/pogination/pogination'; // Убедись, что компонент есть!
+import Pagination from '../../Components/pogination/pogination';
+import { motion } from 'framer-motion';
 
 function BooksSection() {
   const [books, setBooks] = useState([]);
@@ -8,17 +9,24 @@ function BooksSection() {
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
+  const [likedBooks, setLikedBooks] = useState({});
   const [totalPages, setTotalPages] = useState(1);
 
-  const booksPerPage = 2;
+  const booksPerPage = 8;
 
   const fetchBooks = async () => {
     try {
-      const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
-      const res = await fetch(url);
+      const res = await fetch(`https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`);
       const data = await res.json();
+
       setBooks(data.data);
       setTotalPages(data.totalPages);
+
+      const initialLikes = {};
+      data.data.forEach(book => {
+        initialLikes[book.id] = book.isLiked || false;
+      });
+      setLikedBooks(initialLikes);
     } catch (error) {
       console.error('Xatolik:', error);
     }
@@ -37,6 +45,32 @@ function BooksSection() {
     const bySearch = book.title.toLowerCase().includes(searchTerm.toLowerCase());
     return byCategory && byLanguage && bySearch;
   });
+
+  const handleLike = async (bookId) => {
+    try {
+      const res = await fetch(`https://lib.qaxramonov.uz/api/v1/like`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },  
+        body: JSON.stringify({ bookId }), 
+      });
+
+      if (!res.ok) throw new Error('Ошибка при отправке лайка');
+
+      const result = await res.json();
+
+      setLikedBooks(prev => ({ ...prev, [bookId]: result.liked }));
+
+      setBooks(prevBooks =>
+        prevBooks.map(book =>
+          book.id === bookId ? { ...book, likes: result.likes } : book
+        )
+      );
+    } catch (err) {
+      console.error('Ошибка при отправке лайка:', err);
+    }
+  };
 
   return (
     <section>
@@ -85,28 +119,45 @@ function BooksSection() {
       <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
-            <div key={index} style={{ boxShadow: '3px 4px 10px 2px #00000040' }} className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px]'>
+            <motion.div
+              key={book.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              style={{ boxShadow: '3px 4px 10px 2px #00000040' }}
+              className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px] bg-white'
+            >
               <div>
                 <img src={book.image} alt={book.title} className='rounded-[10px] w-full object-contain h-52' />
                 <div className='pl-[8px]'>
                   <h2 className='text-[20px] text-[#202020] font-[700]'>{book.title}</h2>
-                  <div className='flex justify-between mt-[15px]'>
+                  <div className='flex justify-between mt-[15px] items-center'>
                     <div>
                       <p>Formati: {book.format}</p>
                       <p>Kitob betlari soni: {book.pages}</p>
                       <p>Til: {book.language}</p>
                     </div>
-                    <IoMdHeartEmpty className='w-[30px] h-[30px]' />
+                    <div className='flex flex-col items-center'>
+                      <button onClick={() => handleLike(book.id)}>
+                        {likedBooks[book.id] ? (
+                          <IoMdHeart className="text-red-500 w-[30px] h-[30px]" />
+                        ) : (
+                          <IoMdHeartEmpty className="text-gray-400 w-[30px] h-[30px]" />
+                        )}
+                      </button>
+                      <span className='text-[14px]'>{book.likes}</span>
+                    </div>
                   </div>
                   <button className='bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]'>
                     Yuklab Olish
                   </button>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))
         ) : (
-          <p className='text-center w-full text-xl mt-10'>Hech narsa topilmadi 😢</p>
+          <p className='text-center w-full text-xl mt-10'>Kitoblar topilmadi.</p>
         )}
       </div>
 
