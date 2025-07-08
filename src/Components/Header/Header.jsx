@@ -1,4 +1,4 @@
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom'; // ✅ Link va useNavigate
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 
@@ -15,28 +15,46 @@ const langOptions = [
 
 const Header = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate(); // ✅ navigate yaratildi
+
+  const handleSelectChange = (e) => {
+    const value = e.target.value;
+    if (value === 'rahbariyat') {
+      navigate('/managment');
+    } else if (value === 'akm') {
+      navigate('/akm');
+    }
+  };
 
   return (
     <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
       <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
           <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="cursor-pointer" // тоже можно для стиля
-            />
+            <img src={logo} alt="Logo" className="cursor-pointer" />
           </Link>
           <h1 className="text-2xl leading-tight w-[210px]">
-            Tuproqqal’a tumani Axborot kutubxona  markazi
+            Tuproqqal’a tumani Axborot kutubxona markazi
           </h1>
         </div>
 
-        <ul className="flex gap-8 text-2xl font-bold">
+        <ul className="flex gap-8 text-2xl font-bold items-center">
           <li><Link to="/">{t('home')}</Link></li>
           <li><Link to="/news">{t('news')}</Link></li>
           <li><Link to="/books">{t('books')}</Link></li>
-          <li><Link to="/managment">{t('rahbariyat')}</Link></li>
+          <li>
+            <select
+              id="bolim"
+              name="bolim"
+              onChange={handleSelectChange}
+              defaultValue=""
+              className="text-white text-2xl font-inter bg-blue-900 rounded px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" disabled hidden>{t('malumot')}</option>
+              <option value="rahbariyat">{t('rahbariyat')}</option>
+              <option value="akm">{t('akm')}</option>
+            </select>
+          </li>
         </ul>
 
         <div className="min-w-[160px]">
@@ -50,7 +68,12 @@ const Header = () => {
               control: (base) => ({ ...base, backgroundColor: '#1E3A8A', borderColor: 'white', color: 'white' }),
               singleValue: (base) => ({ ...base, color: 'white' }),
               menu: (base) => ({ ...base, backgroundColor: '#1E3A8A', color: 'white' }),
-              option: (base, state) => ({ ...base, backgroundColor: state.isFocused ? '#3B82F6' : '#1E3A8A', color: 'white', cursor: 'pointer' }),
+              option: (base, state) => ({
+                ...base,
+                backgroundColor: state.isFocused ? '#3B82F6' : '#1E3A8A',
+                color: 'white',
+                cursor: 'pointer'
+              }),
             }}
           />
         </div>
