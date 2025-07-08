@@ -1,5 +1,3 @@
-// components/Header.jsx
-import React from 'react';
 import { Link } from 'react-router';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
@@ -29,8 +27,8 @@ const Header = () => {
               className="cursor-pointer" // тоже можно для стиля
             />
           </Link>
-          <h1 className="text-2xl leading-tight">
-            Tuproqqal’a tumani <br /> Axborot kutubxona <br /> markazi
+          <h1 className="text-2xl leading-tight w-[210px]">
+            Tuproqqal’a tumani Axborot kutubxona  markazi
           </h1>
         </div>
 

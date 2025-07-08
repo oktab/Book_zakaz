@@ -15,9 +15,12 @@ function BooksSection() {
 
   const fetchBooks = async () => {
     try {
-      const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
+      const url = `https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
       const res = await fetch(url);
       const data = await res.json();
+
+      console.log(data);
+      
       setBooks(data.data);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -97,7 +100,7 @@ function BooksSection() {
               className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px] bg-white'
             >
               <div>
-                <img src={book.image} alt={book.title} className='rounded-[10px]' />
+                <img src={book.image} alt={book.title} className='rounded-[10px] w-full object-contain h-52' />
                 <div className='pl-[8px]'>
                   <h2 className='text-[20px] text-[#202020] font-[700]'>{book.title}</h2>
                   <div className='flex justify-between mt-[15px]'>
