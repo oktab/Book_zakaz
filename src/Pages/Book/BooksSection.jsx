@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
 import Pagination from '../../Components/pogination/pogination';
 import { motion } from 'framer-motion';
 
@@ -52,7 +52,7 @@ function BooksSection() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
+        },  
         body: JSON.stringify({ bookId }), 
       });
 
@@ -135,7 +135,7 @@ function BooksSection() {
                   <div className='flex justify-between mt-[15px] items-center'>
                     <div>
                       <p>Formati: {book.format}</p>
-                      <p>Betlar: {book.pages}</p>
+                      <p>Kitob betlari soni: {book.pages}</p>
                       <p>Til: {book.language}</p>
                     </div>
                     <div className='flex flex-col items-center'>
@@ -166,6 +166,8 @@ function BooksSection() {
       </div>
     </section>
   );
+
+
 }
 
 export default BooksSection;
