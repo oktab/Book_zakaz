@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
-import Pagination from '../../Components/pogination/pogination';
-import { motion } from 'framer-motion';
+import Pagination from '../../Components/pogination/pogination'; // Убедись, что компонент есть!
 
 function BooksSection() {
   const [books, setBooks] = useState([]);
@@ -11,16 +10,13 @@ function BooksSection() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const booksPerPage = 8;
+  const booksPerPage = 2;
 
   const fetchBooks = async () => {
     try {
-      const url = `https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
+      const url = `http://13.60.234.19:5000/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`;
       const res = await fetch(url);
       const data = await res.json();
-
-      console.log(data);
-      
       setBooks(data.data);
       setTotalPages(data.totalPages);
     } catch (error) {
@@ -87,18 +83,9 @@ function BooksSection() {
       </div>
 
       <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
-
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              style={{ boxShadow: '3px 4px 10px 2px #00000040' }}
-              className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px] bg-white'
-            >
+            <div key={index} style={{ boxShadow: '3px 4px 10px 2px #00000040' }} className='w-[300px] rounded-[10px] border-[#1E3A8A33] border py-[10px] px-[5px]'>
               <div>
                 <img src={book.image} alt={book.title} className='rounded-[10px] w-full object-contain h-52' />
                 <div className='pl-[8px]'>
@@ -116,10 +103,10 @@ function BooksSection() {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))
         ) : (
-          <p className='text-center w-full text-xl mt-10'></p>
+          <p className='text-center w-full text-xl mt-10'>Hech narsa topilmadi 😢</p>
         )}
       </div>
 
