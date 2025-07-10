@@ -24,7 +24,7 @@ const Header = () => {
             <img
               src={logo}
               alt="Logo"
-              className="cursor-pointer" // тоже можно для стиля
+              className="cursor-pointer"
             />
           </Link>
           <h1 className="text-2xl leading-tight w-[210px]">
