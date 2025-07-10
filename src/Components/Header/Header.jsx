@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
+import { FaUser } from "react-icons/fa";
 
 import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
@@ -38,14 +39,18 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
+       <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
       <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
           <Link to="/">
-            <img src={logo} alt="Logo" className="cursor-pointer" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="cursor-pointer" 
+            />
           </Link>
           <h1 className="text-2xl leading-tight w-[210px]">
-            Tuproqqal’a tumani Axborot kutubxona markazi
+            Tuproqqal’a tumani Axborot kutubxona  markazi
           </h1>
         </div>
 
@@ -53,19 +58,7 @@ const Header = () => {
           <li><Link to="/">{t('home')}</Link></li>
           <li><Link to="/news">{t('news')}</Link></li>
           <li><Link to="/books">{t('books')}</Link></li>
-          <li>
-            <select
-              id="bolim"
-              name="bolim"
-              value={selectedOption}
-              onChange={handleSelectChange}
-              className="text-white text-2xl font-inter bg-blue-900 rounded px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="" disabled hidden>{t('malumot')}</option>
-              <option value="rahbariyat">{t('rahbariyat')}</option>
-              <option value="akm">{t('akm')}</option>
-            </select>
-          </li>
+          <li><Link to="/managment">{t('rahbariyat')}</Link></li>
         </ul>
 
         <div className="min-w-[160px]">
@@ -88,8 +81,12 @@ const Header = () => {
             }}
           />
         </div>
+        <div className='w-[50px] h-[50px] border rounded-[10px] flex justify-center items-center'>
+            <Link to="/signin"><FaUser /></Link>
+        </div>
       </div>
     </header>
+    
   );
 };
 
