@@ -39,7 +39,7 @@ const ModernLogin = () => {
       const res = await loginUser(form)
       console.log(res);
 
-      login(res.data.token)
+      login(res.data.acceesToken)
       navigate("/")
     } catch (error) {
       alert("Login xato: " + error.responsive?.data?.message || "Server xatosi")
