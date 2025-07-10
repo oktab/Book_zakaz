@@ -7,20 +7,45 @@ import Books from "./Pages/Book/Books.jsx";
 import Layout from "./Pages/Layout.jsx";
 import Rahbariat from "./Pages/Rahbariyat/Rahbariat.jsx";
 import ModernLogin from "./Components/registor/Registor.jsx";
+import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="/news" element={<News />} />
-          <Route path="/news/info/:id" element={<NewFull />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="/managment" element={<Rahbariat />} />
+        <Route path="/" element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
+          <Route index element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          } />
+          <Route path="/news" element={
+            <ProtectedRoute>
+              <News />
+            </ProtectedRoute>
+          } />
+          <Route path="/news/info/:id" element={
+            <ProtectedRoute>
+              <NewFull />
+            </ProtectedRoute>
+          } />
+          <Route path="/books" element={
+            <ProtectedRoute>
+              <Books />
+            </ProtectedRoute>
+          } />
+          <Route path="/managment" element={
+            <ProtectedRoute>
+              <Rahbariat />
+            </ProtectedRoute>
+          } />
         </Route>
         <Route path="/signin" element={<ModernLogin />} />
         {/* <Route path="/signup" element={<}/> */}
-      </Routes>
+      </Routes >
     </>
   );
 }

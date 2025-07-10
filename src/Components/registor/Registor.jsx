@@ -5,30 +5,61 @@ import {
   FaGithub,
   FaLinkedinIn,
 } from "react-icons/fa";
+import useAuthStore from "../../store/auth";
+import { useNavigate } from "react-router";
+import { loginUser, registerUser } from "../../api/auth";
 
 const ModernLogin = () => {
+  const [form, setForm] = useState({ email: "", password: "" })
+  const login = useAuthStore((state) => state.login)
+  const registerStore = useAuthStore((state) => state.register);
+  const navigate = useNavigate()
+
+  const [register, setRegister] = useState({ name: "", email: "", password: "" })
+
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const formHandle = (e) => {
+  const formRegisterHandle = async (e) => {
     e.preventDefault();
+
+    try {
+      const res = await registerStore(register);
+
+      navigate("/");
+    } catch (error) {
+      console.log("❌ Register error:", error.response);
+      alert(error.response?.data?.message || "Server xatosi");
+    }
+  }
+
+  const formHandle = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await loginUser(form)
+      console.log(res);
+
+      login(res.data.token)
+      navigate("/")
+    } catch (error) {
+      alert("Login xato: " + error.responsive?.data?.message || "Server xatosi")
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-200 to-indigo-100 font-[Montserrat]">
       <div
-        className={`relative bg-white rounded-[20px] shadow-2xl w-[768px] max-w-full min-h-[480px] overflow-hidden transition-all duration-700 ${
-          isRegistering ? "animate-[move_0.6s] register-active" : ""
-        }`}
+        className={`relative bg-white rounded-[20px] shadow-2xl w-[768px] max-w-full min-h-[480px] overflow-hidden transition-all duration-700 ${isRegistering ? "animate-[move_0.6s] register-active" : ""
+          }`}
       >
         <div
-          className={`absolute top-0 h-full w-1/2 transition-all duration-700 z-10 ${
-            isRegistering
-              ? "translate-x-full opacity-100 z-50"
-              : "opacity-0 z-10"
-          }`}
+          className={`absolute top-0 h-full w-1/2 transition-all duration-700 z-10 ${isRegistering
+            ? "translate-x-full opacity-100 z-50"
+            : "opacity-0 z-10"
+            }`}
         >
           <form
-            onSubmit={formHandle}
+            onSubmit={formRegisterHandle}
             className="bg-white h-full flex flex-col items-center justify-center px-10"
           >
             <h1 className="text-2xl font-bold">Create Account</h1>
@@ -51,16 +82,19 @@ const ModernLogin = () => {
             <input
               type="text"
               placeholder="Name"
+              onChange={(e) => setRegister({ ...register, name: e.target.value })}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <input
               type="email"
               placeholder="Email"
+              onChange={(e) => setRegister({ ...register, email: e.target.value })}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <input
               type="password"
               placeholder="Password"
+              onChange={(e) => setRegister({ ...register, password: e.target.value })}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <button className="mt-4 px-10 py-2 rounded-md text-white font-semibold uppercase text-sm bg-[#512da8] hover:bg-indigo-800">
@@ -70,9 +104,8 @@ const ModernLogin = () => {
         </div>
 
         <div
-          className={`absolute top-0 h-full w-1/2 left-0 transition-all duration-700 z-20 ${
-            isRegistering ? "translate-x-full" : ""
-          }`}
+          className={`absolute top-0 h-full w-1/2 left-0 transition-all duration-700 z-20 ${isRegistering ? "translate-x-full" : ""
+            }`}
         >
           <form
             onSubmit={formHandle}
@@ -98,11 +131,13 @@ const ModernLogin = () => {
             <input
               type="email"
               placeholder="Email"
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <input
               type="password"
               placeholder="Password"
+              onChange={(e) => setForm({ ...form, password: e.target.value })}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <a href="#" className="text-xs text-[#512da8] mt-2">
@@ -114,9 +149,8 @@ const ModernLogin = () => {
           </form>
         </div>
         <div
-          className={`absolute top-0 left-1/2 w-1/2 h-full transition-all duration-700 bg-[#512da8] text-white flex flex-col items-center justify-center text-center px-10 z-30 ${
-            isRegistering ? "-translate-x-full rounded-r-[100px]" : "rounded-l-[100px]"
-          }`}
+          className={`absolute top-0 left-1/2 w-1/2 h-full transition-all duration-700 bg-[#512da8] text-white flex flex-col items-center justify-center text-center px-10 z-30 ${isRegistering ? "-translate-x-full rounded-r-[100px]" : "rounded-l-[100px]"
+            }`}
         >
           {isRegistering ? (
             <>
