@@ -8,6 +8,8 @@ import Layout from "./Pages/Layout.jsx";
 import Rahbariat from "./Pages/Rahbariyat/Rahbariat.jsx";
 import ModernLogin from "./Components/registor/Registor.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
+import Akm from './Pages/AKM/Akm.jsx';
+
 function App() {
   return (
     <>
@@ -42,9 +44,13 @@ function App() {
               <Rahbariat />
             </ProtectedRoute>
           } />
+          <Route path="/akm" element={
+            <ProtectedRoute>
+              <Akm />
+            </ProtectedRoute>
+          } />
         </Route>
         <Route path="/signin" element={<ModernLogin />} />
-        {/* <Route path="/signup" element={<}/> */}
       </Routes >
     </>
   );
