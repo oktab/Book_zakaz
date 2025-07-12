@@ -31,7 +31,7 @@ function News() {
   }, [currentPage]);
 
   return (
-    <div className="max-w-[1177px] w-full mx-auto px-4">
+    <div className="max-w-[1177px] w-full mt-12 mx-auto px-4">
       <h1 className="text-6xl text-black text-center font-bold pt-[100px] font-inter">
         {t('news_title')}
       </h1>

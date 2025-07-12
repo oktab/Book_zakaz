@@ -67,7 +67,11 @@ const Header = () => {
       <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
           <Link to="/">
-            <img src={logo} alt="Logo" className="cursor-pointer" />
+            <img
+              src={logo}
+              alt="Logo"
+              className="cursor-pointer"
+            />
           </Link>
           <h1 className="text-2xl leading-tight w-[210px]">
             Tuproqqal’a tumani Axborot kutubxona markazi
@@ -84,7 +88,7 @@ const Header = () => {
               name="bolim"
               value={selectedOption}
               onChange={handleSelectChange}
-              className="text-white text-2xl font-inter bg-blue-900 rounded px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-white text-2xl font-inter bg-blue-900 rounded focus:outline-none"
             >
               <option value="" disabled hidden>{t('malumot')}</option>
               <option value="rahbariyat">{t('rahbariyat')}</option>

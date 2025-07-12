@@ -5,26 +5,6 @@ import {
   FaGithub,
   FaLinkedinIn,
 } from "react-icons/fa";
-<<<<<<< HEAD
-import { useNavigate } from "react-router";
-
-const ModernLogin = () => {
-  const [form,setForm] = useState({email:"",password:""})
-  const login = useAuthStore((state) =>state.login)
-  const navigate = useNavigate()
-  const [isRegistering, setIsRegistering] = useState(false);
-
-  const formHandle = async (e) => {
-    e.preventDefault();
-    try{
-      const res = await loginUser(form)
-
-      login(res.data.token)
-      navigate("/")
-    }
-    catch(error){
-
-=======
 import useAuthStore from "../../store/auth";
 import { useNavigate } from "react-router";
 import { loginUser, registerUser } from "../../api/auth";
@@ -63,7 +43,26 @@ const ModernLogin = () => {
       navigate("/")
     } catch (error) {
       alert("Login xato: " + error.responsive?.data?.message || "Server xatosi")
->>>>>>> 5dd040dbc98c37042f00f14132c206aba271e203
+=========
+import { useNavigate } from "react-router";
+
+const ModernLogin = () => {
+  const [form,setForm] = useState({email:"",password:""})
+  const login = useAuthStore((state) =>state.login)
+  const navigate = useNavigate()
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  const formHandle = async (e) => {
+    e.preventDefault();
+    try{
+      const res = await loginUser(form)
+
+      login(res.data.token)
+      navigate("/")
+    }
+    catch(error){
+
+>>>>>>>>> Temporary merge branch 2
     }
   };
 
@@ -152,11 +151,11 @@ const ModernLogin = () => {
             <input
               type="email"
               placeholder="Email"
-<<<<<<< HEAD
-              onChange={(e) =>setForm({ ...form, email:e.target.value})}
-=======
+<<<<<<<<< Temporary merge branch 1
               onChange={(e) => setForm({ ...form, email: e.target.value })}
->>>>>>> 5dd040dbc98c37042f00f14132c206aba271e203
+=========
+              onChange={(e) =>setForm({ ...form, email:e.target.value})}
+>>>>>>>>> Temporary merge branch 2
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <input
