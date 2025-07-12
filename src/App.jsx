@@ -3,12 +3,12 @@ import { Route, Routes } from "react-router";
 import Home from "./Pages/Home/Home.jsx";
 import News from "./Pages/News/News.jsx";
 import NewFull from "./Pages/News/NewFull.jsx";
-import Books from "./Pages/Book/Books.jsx";
 import Layout from "./Pages/Layout.jsx";
 import Rahbariat from "./Pages/Rahbariyat/Rahbariat.jsx";
 import ModernLogin from "./Components/registor/Registor.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Akm from './Pages/AKM/Akm.jsx';
+import BooksSection from './Pages/Book/BooksSection.jsx';
 
 function App() {
   return (
@@ -36,7 +36,7 @@ function App() {
           } />
           <Route path="/books" element={
             <ProtectedRoute>
-              <Books />
+              <BooksSection />
             </ProtectedRoute>
           } />
           <Route path="/managment" element={

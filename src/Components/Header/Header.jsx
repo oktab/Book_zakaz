@@ -88,7 +88,7 @@ const Header = () => {
               name="bolim"
               value={selectedOption}
               onChange={handleSelectChange}
-              className="text-white text-2xl font-inter bg-blue-900 rounded px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-white text-2xl font-inter bg-blue-900 rounded focus:outline-none"
             >
               <option value="" disabled hidden>{t('malumot')}</option>
               <option value="rahbariyat">{t('rahbariyat')}</option>

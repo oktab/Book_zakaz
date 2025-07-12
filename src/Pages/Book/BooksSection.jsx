@@ -19,6 +19,8 @@ function BooksSection() {
       const res = await fetch(`https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=${booksPerPage}`);
       const data = await res.json();
 
+      console.log(data);
+
       setBooks(data.data);
       setTotalPages(data.totalPages);
 
@@ -52,8 +54,8 @@ function BooksSection() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },  
-        body: JSON.stringify({ bookId }), 
+        },
+        body: JSON.stringify({ bookId }),
       });
 
       if (!res.ok) throw new Error('Ошибка при отправке лайка');
@@ -146,7 +148,7 @@ function BooksSection() {
                           <IoMdHeartEmpty className="text-gray-400 w-[30px] h-[30px]" />
                         )}
                       </button>
-                      <span className='text-[14px]'>{book.likes}</span>
+                      <span className='text-[14px]'>{book.likes.map((item, index) => item.likesCount)}</span>
                     </div>
                   </div>
                   <button className='bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]'>
