@@ -5,12 +5,25 @@ import {
   FaGithub,
   FaLinkedinIn,
 } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const ModernLogin = () => {
+  const [form,setForm] = useState({email:"",password:""})
+  const login = useAuthStore((state) =>state.login)
+  const navigate = useNavigate()
   const [isRegistering, setIsRegistering] = useState(false);
 
-  const formHandle = (e) => {
+  const formHandle = async (e) => {
     e.preventDefault();
+    try{
+      const res = await loginUser(form)
+
+      login(res.data.token)
+      navigate("/")
+    }
+    catch(error){
+
+    }
   };
 
   return (
@@ -98,6 +111,7 @@ const ModernLogin = () => {
             <input
               type="email"
               placeholder="Email"
+              onChange={(e) =>setForm({ ...form, email:e.target.value})}
               className="w-full my-2 px-4 py-2 rounded-md bg-gray-200 outline-none text-sm"
             />
             <input

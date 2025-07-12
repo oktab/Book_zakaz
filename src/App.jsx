@@ -7,6 +7,8 @@ import Books from "./Pages/Book/Books.jsx";
 import Layout from "./Pages/Layout.jsx";
 import Rahbariat from "./Pages/Rahbariyat/Rahbariat.jsx";
 import ModernLogin from "./Components/registor/Registor.jsx";
+import Akm from './Pages/AKM/Akm.jsx';
+
 function App() {
   return (
     <>
@@ -17,9 +19,9 @@ function App() {
           <Route path="/news/info/:id" element={<NewFull />} />
           <Route path="/books" element={<Books />} />
           <Route path="/managment" element={<Rahbariat />} />
+          <Route path="/akm" element={<Akm />} />
         </Route>
         <Route path="/signin" element={<ModernLogin />} />
-        {/* <Route path="/signup" element={<}/> */}
       </Routes>
     </>
   );
