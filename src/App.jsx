@@ -9,6 +9,7 @@ import Rahbariat from "./Pages/Rahbariyat/Rahbariat.jsx";
 import ModernLogin from "./Components/registor/Registor.jsx";
 import Akm from './Pages/AKM/Akm.jsx';
 
+import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 function App() {
   return (
     <>

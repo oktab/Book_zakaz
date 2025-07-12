@@ -1,8 +1,8 @@
-import axios from "axios"
+import axios from "axios";
 
 const API = axios.create({
-    basUrl:"https://lib.qaxramonov.uz/api/v1"
+    baseURL: "https://lib.qaxramonov.uz/api/v1"
 })
 
-export const loginUser = (data) => API.post("/users/login",data)
-export const registerUser = (data) => API.post("/users/register",data)
+export const loginUser = (data) => API.post("/users/login", data)
+export const registerUser = (data) => API.post("/users/register", data)

@@ -1,9 +1,11 @@
 import React from 'react'
 import useAuthStore from '../store/auth'
+import { Navigate } from 'react-router'
 
-function ProtectedRoute(children) {
-    const token = useAuthStore((state)=> state.token)
-    if(!token) return <Navigate to = "/singin" />
+const ProtectedRoute = ({ children }) => {
+    const token = useAuthStore((state) => state.token)
+
+    if (!token) return <Navigate to="/signin" />
     return children;
 }
 
