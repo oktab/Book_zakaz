@@ -21,14 +21,11 @@ const BooksSection = () => {
       try {
         const res = await fetch(`https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=8`);
         const data = await res.json();
+        console.log(data);
+
         setBooks(data.data);
         setTotalPages(data.totalPages);
 
-        const initialLikes = {};
-        data.data.forEach(book => {
-          initialLikes[book.id] = book.isLiked || false;
-        });
-        setLikedBooks(initialLikes);
       } catch (error) {
         console.error('Xatolik:', error);
       }

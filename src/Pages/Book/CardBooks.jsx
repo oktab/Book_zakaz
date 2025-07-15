@@ -1,25 +1,8 @@
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { motion } from 'framer-motion';
 import { Link } from 'react-router';
-import useBooksStore from "../../store/useBooksStore";
 
 const BookCard = ({ book, index }) => {
-    const { likedBooks, setLikedBooks, updateBookLikes } = useBooksStore();
-
-    const handleLike = async (bookId) => {
-        try {
-            const res = await fetch(`https://lib.qaxramonov.uz/api/v1/likes`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ bookId }),
-            });
-            const result = await res.json();
-            setLikedBooks((prev) => ({ ...prev, [bookId]: result.liked }));
-            updateBookLikes(bookId, result.likes);
-        } catch (err) {
-            console.error('Like xatoligi:', err);
-        }
-    };
 
     return (
         <motion.div
@@ -41,17 +24,12 @@ const BookCard = ({ book, index }) => {
                         <p>Til: {book.language}</p>
                     </div>
                     <div className='flex flex-col items-center'>
-                        <button onClick={() => handleLike(book.id)}>
-                            {likedBooks[book.id] ? (
-                                <IoMdHeart className="text-red-500 w-[30px] h-[30px]" />
-                            ) : (
+                        <button >
+                                {/* <IoMdHeart className="text-red-500 w-[30px] h-[30px]" /> */}
                                 <IoMdHeartEmpty className="text-gray-400 w-[30px] h-[30px]" />
-                            )}
                         </button>
                         <span className='text-[14px]'>
-                            {Array.isArray(book.likes)
-                                ? book.likes.map((item) => item.likesCount).join(', ')
-                                : book.likes?.likesCount || 0}
+                            {/* {likeCount} */}
                         </span>
                     </div>
                 </div>
