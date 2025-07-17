@@ -9,7 +9,6 @@ const BooksSection = () => {
     books, setBooks,
     totalPages, setTotalPages,
     currentPage, setCurrentPage,
-    setLikedBooks
   } = useBooksStore();
 
   const [selectedCategory, setSelectedCategory] = useState('All');

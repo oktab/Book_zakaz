@@ -8,6 +8,8 @@ import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
 import uzb from './../../assets/img/uzb.png';
 import logo from './../../assets/img/logo.png';
+import { logoutUser } from '../../api/auth';
+import useAuthStore from '../../store/auth';
 
 const langOptions = [
   {
@@ -45,6 +47,8 @@ const Header = () => {
   const location = useLocation();
   const [selectedOption, setSelectedOption] = useState('');
 
+  const { logout, token } = useAuthStore()
+
   useEffect(() => {
     if (location.pathname !== '/akm' && location.pathname !== '/managment') {
       setSelectedOption('');
@@ -59,6 +63,24 @@ const Header = () => {
       navigate('/managment');
     } else if (value === 'akm') {
       navigate('/akm');
+    }
+  };
+
+  const handleLogoutUser = async () => {
+    try {
+      const res = await logoutUser(null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("Logout javobi:", res.data);
+
+      logout();
+      navigate("/signin");
+    } catch (error) {
+      const message = error?.response?.data?.message || "Server xatosi";
+      alert("Sahifadan chiqishda xatolik: " + message);
     }
   };
 
@@ -119,7 +141,10 @@ const Header = () => {
         </div>
 
         <div className='w-[50px] h-[50px] border rounded-[10px] flex justify-center items-center'>
-          <Link to="/signin"><FaUser /></Link>
+          {/* <Link to="/signin"><FaUser /></Link> */}
+          <button onClick={handleLogoutUser}>
+            <FaUser />
+          </button>
         </div>
       </div>
     </header>
