@@ -1,38 +1,59 @@
 import { create } from "zustand"
 import { registerUser } from "../api/auth"
+import { jwtDecode } from "jwt-decode";
 
-const useAuthStore = create((set) => ({
-    user: null,
-    token: localStorage.getItem('accessToken'),
+const getUserFromToken = (token) => {
+    try {
+        const decoded = jwtDecode(token);
+        return {
+            id: decoded.id || decoded.userId || decoded.sub, 
+            email: decoded.email,
+        };
+    } catch (error) {
+        console.error("Token decoding error:", error);
+        return null;
+    }
+};
 
-    login: (token) => {
-        localStorage.setItem('accessToken', token)
-        set({ token })
-    },
-    logout: () => {
-        localStorage.removeItem('accessToken')
-        set({ token: null, user: null })
-    },
+const useAuthStore = create((set) => {
+    const token = localStorage.getItem("accessToken");
+    const user = token ? getUserFromToken(token) : null;
 
-    register: async (formData) => {
-        const res = await registerUser(formData)
+    return {
+        user,
+        token,
 
-        const token = res.data.token ||
-            res.data.access_token ||
-            res.data?.data?.token ||
-            res.data?.data?.access_token
+        login: (token) => {
+            localStorage.setItem("accessToken", token);
+            const user = getUserFromToken(token);
+            set({ token, user });
+        },
 
+        logout: () => {
+            localStorage.removeItem("accessToken");
+            set({ token: null, user: null });
+        },
 
+        register: async (formData) => {
+            const res = await registerUser(formData);
 
-        if (token) {
-            localStorage.setItem('accessToken', token)
-            set({ token })
-        }
-        return res
-    },
+            const token =
+                res.data.token ||
+                res.data.access_token ||
+                res.data?.data?.token ||
+                res.data?.data?.access_token;
 
-    setUser: (user) => set({ user })
+            if (token) {
+                localStorage.setItem("accessToken", token);
+                const user = getUserFromToken(token);
+                set({ token, user });
+            }
 
-}))
+            return res;
+        },
+
+        setUser: (user) => set({ user }),
+    };
+});
 
 export default useAuthStore;

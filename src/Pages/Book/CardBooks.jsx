@@ -3,8 +3,48 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useBooksStore from "../../store/useBooksStore";
 import useAuthStore from "../../store/auth";
+import { likeBookApi, deleteLikesApi, getLikesApi } from "../../api/auth"
 
 const BookCard = ({ book, index }) => {
+    const { likes, addLike, removeLike, setLikes } = useBooksStore();
+
+    const { token, user } = useAuthStore();
+
+    const existingLike = likes.find((like) => like.bookId === book.id);
+    const isLiked = Boolean(existingLike);
+    const likeCount = book.likes.filter((like) => like.bookId === book.id).length;
+
+    const handleLikeClick = async () => {
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        try {
+            if (existingLike) {
+                await deleteLikesApi(existingLike.id, config);
+                removeLike(existingLike.id);
+                const updatedLikes = likes.filter((like) => like.id !== existingLike.id);
+                setLikes(updatedLikes);
+            } else {
+                const payload = {
+                    bookId: book.id,
+                    userId: user?.id, 
+                    likesCount: 1,
+                };
+
+                const res = await likeBookApi(payload, config);
+                console.log(res);
+
+                addLike(res.data); 
+                const updatedLikes = [...likes, res.data];
+                setLikes(updatedLikes);
+            }
+        } catch (error) {
+            console.error("Like toggling error:", error.response?.data || error.message);
+        }
+    };
 
     return (
         <motion.div
@@ -26,11 +66,14 @@ const BookCard = ({ book, index }) => {
                         <p>Til: {book.language}</p>
                     </div>
                     <div className="flex flex-col items-center">
-                        <button >
-                            {/* <IoMdHeart className="text-red-500 w-[30px] h-[30px]" /> */}
-                            <IoMdHeartEmpty className="text-gray-400 w-[30px] h-[30px]" />
+                        <button onClick={handleLikeClick}>
+                            {isLiked ? (
+                                <IoMdHeart className="text-red-500 w-[30px] h-[30px]" />
+                            ) : (
+                                <IoMdHeartEmpty className="text-gray-400 w-[30px] h-[30px]" />
+                            )}
                         </button>
-                        {/* <span className="text-[14px]">{likeCount}</span> */}
+                        <span className="text-[14px]">{likeCount}</span>
                     </div>
                 </div>
                 <Link to={book.file}>
