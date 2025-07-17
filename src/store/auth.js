@@ -3,14 +3,14 @@ import { registerUser } from "../api/auth"
 
 const useAuthStore = create((set) => ({
     user: null,
-    token: localStorage.getItem('token'),
+    token: localStorage.getItem('accessToken'),
 
     login: (token) => {
-        localStorage.setItem('token', token)
+        localStorage.setItem('accessToken', token)
         set({ token })
     },
     logout: () => {
-        localStorage.removeItem('token')
+        localStorage.removeItem('accessToken')
         set({ token: null, user: null })
     },
 
@@ -22,8 +22,10 @@ const useAuthStore = create((set) => ({
             res.data?.data?.token ||
             res.data?.data?.access_token
 
+
+
         if (token) {
-            localStorage.setItem('token', token)
+            localStorage.setItem('accessToken', token)
             set({ token })
         }
         return res
