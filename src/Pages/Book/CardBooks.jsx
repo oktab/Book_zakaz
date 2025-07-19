@@ -6,11 +6,13 @@ import useAuthStore from "../../store/auth";
 import { likeBookApi, deleteLikesApi, getLikesApi } from "../../api/auth"
 
 const BookCard = ({ book, index }) => {
-    const { likes, addLike, removeLike, setLikes } = useBooksStore();
-
+    const { likes, addLike, removeLike } = useBooksStore();
     const { token, user } = useAuthStore();
 
-    const existingLike = likes.find((like) => like.bookId === book.id);
+    const existingLike = Array.isArray(likes)
+        ? likes.find((like) => like.bookId === book.id && like.userId === user?.id)
+        : null;
+
     const isLiked = Boolean(existingLike);
     const likeCount = book.likes.filter((like) => like.bookId === book.id).length;
 
@@ -25,21 +27,15 @@ const BookCard = ({ book, index }) => {
             if (existingLike) {
                 await deleteLikesApi(existingLike.id, config);
                 removeLike(existingLike.id);
-                const updatedLikes = likes.filter((like) => like.id !== existingLike.id);
-                setLikes(updatedLikes);
             } else {
                 const payload = {
                     bookId: book.id,
-                    userId: user?.id, 
+                    userId: user?.id,
                     likesCount: 1,
                 };
 
                 const res = await likeBookApi(payload, config);
-                console.log(res);
-
-                addLike(res.data); 
-                const updatedLikes = [...likes, res.data];
-                setLikes(updatedLikes);
+                addLike(res.data);
             }
         } catch (error) {
             console.error("Like toggling error:", error.response?.data || error.message);

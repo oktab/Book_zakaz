@@ -47,7 +47,7 @@ const Header = () => {
   const location = useLocation();
   const [selectedOption, setSelectedOption] = useState('');
 
-  const { logout, token } = useAuthStore()
+  const { logout, token } = useAuthStore.getState()
 
   useEffect(() => {
     if (location.pathname !== '/akm' && location.pathname !== '/managment') {
@@ -67,8 +67,15 @@ const Header = () => {
   };
 
   const handleLogoutUser = async () => {
+    if (!token) {
+      console.warn("Token mavjud emas. To‘g‘ridan-to‘g‘ri chiqish.");
+      logout();
+      navigate("/signin");
+      return;
+    }
+
     try {
-      const res = await logoutUser(null, {
+      const res = await logoutUser({}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -79,8 +86,16 @@ const Header = () => {
       logout();
       navigate("/signin");
     } catch (error) {
+      const status = error?.response?.status;
       const message = error?.response?.data?.message || "Server xatosi";
-      alert("Sahifadan chiqishda xatolik: " + message);
+
+      if (status === 401) {
+        alert("Token eskirgan. Qaytadan kiring.");
+        logout();
+        navigate("/signin");
+      } else {
+        alert("Sahifadan chiqishda xatolik: " + message);
+      }
     }
   };
 
