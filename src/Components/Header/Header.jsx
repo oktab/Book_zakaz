@@ -101,7 +101,7 @@ const Header = () => {
 
   return (
     <header className="bg-[#1E3A8A] py-5 fixed top-0 w-full z-50 shadow-md flex items-center">
-      <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
+      <div className="max-w-[1230px] mx-auto w-full flex justify-between items-center text-white font-inter">
         <div className="flex items-center gap-2">
           <Link to="/">
             <img
