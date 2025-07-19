@@ -11,10 +11,7 @@ const BooksSection = () => {
     books, setBooks,
     totalPages, setTotalPages,
     currentPage, setCurrentPage,
-    setLikes,
   } = useBooksStore();
-
-  const { token } = useAuthStore()
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
@@ -37,25 +34,7 @@ const BooksSection = () => {
     fetchBooks();
   }, [currentPage]);
 
-  useEffect(() => {
-    const fetchLikes = async () => {
-      try {
-        const config = {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        }
-
-        const res = await getLikesApi(config)
-        setLikes(res.data)
-      } catch (error) {
-        console.error('Like maʼlumotlarini olishda xatolik:', error);
-      };
-    }
-    if (token) {
-      fetchLikes();
-    }
-  }, [token])
+ 
 
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];

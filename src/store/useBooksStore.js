@@ -5,15 +5,12 @@ const useBooksStore = create((set) => ({
     totalPages: 1,
     currentPage: 1,
 
-    likes: [], // ✅ to'g'ri: boshlang'ich qiymat array
+    likes: [],
     setLikes: (likes) => set({ likes }),
-    addLike: (like) =>
+    addLike: (like) => set((state) => ({ likes: [...state.likes, like] })),
+    removeLike: (likeId) =>
         set((state) => ({
-            likes: [...(state.likes || []), like], // ✅ fallback: agar likes undefined bo'lsa, []
-        })),
-    removeLike: (id) =>
-        set((state) => ({
-            likes: (state.likes || []).filter((like) => like.id !== id), // ✅ fallback
+            likes: state.likes.filter((l) => l.id !== likeId)
         })),
 
     setBooks: (books) => set({ books }),

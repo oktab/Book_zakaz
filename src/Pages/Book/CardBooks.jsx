@@ -4,43 +4,59 @@ import { Link } from "react-router-dom";
 import useBooksStore from "../../store/useBooksStore";
 import useAuthStore from "../../store/auth";
 import { likeBookApi, deleteLikesApi, getLikesApi } from "../../api/auth"
+import { useEffect } from "react";
 
 const BookCard = ({ book, index }) => {
-    const { likes, addLike, removeLike } = useBooksStore();
+    const { likes, setLikes, addLike, removeLike } = useBooksStore();
     const { token, user } = useAuthStore();
 
-    const existingLike = Array.isArray(likes)
-        ? likes.find((like) => like.bookId === book.id && like.userId === user?.id)
-        : null;
+    useEffect(() => {
+        const fetchLikes = async () => {
+            try {
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` },
+                };
+                const res = await getLikesApi(config);
+                setLikes(res.data);
+            } catch (error) {
+                console.error("Layklar olishda xatolik:", error);
+            }
+        };
+
+        if (token) fetchLikes();
+    }, [token]);
+
+    const existingLike = likes.find(
+        (like) => like.bookId === book.id && like.userId === user?.id
+    );
 
     const isLiked = Boolean(existingLike);
-    const likeCount = book.likes.filter((like) => like.bookId === book.id).length;
+
+    const likeCount = likes.filter((like) => like.bookId === book.id).length;
 
     const handleLikeClick = async () => {
         const config = {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
         };
 
         try {
-            if (existingLike) {
+            if (isLiked) {
                 await deleteLikesApi(existingLike.id, config);
                 removeLike(existingLike.id);
             } else {
                 const payload = {
                     bookId: book.id,
-                    userId: user?.id,
+                    userId: user.id,
                     likesCount: 1,
                 };
-
                 const res = await likeBookApi(payload, config);
                 addLike(res.data);
             }
         } catch (error) {
-            console.error("Like toggling error:", error.response?.data || error.message);
+            console.error("Layk bosishda xatolik:", error);
         }
     };
+
 
     return (
         <motion.div
