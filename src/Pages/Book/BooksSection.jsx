@@ -3,6 +3,8 @@ import BookCard from '../Book/CardBooks';
 import BooksFilter from '../Book/BooksFilter';
 import Pagination from '../../Components/pogination/pogination';
 import useBooksStore from '../../store/useBooksStore';
+import useAuthStore from '../../store/auth';
+import { getLikesApi } from '../../api/auth';
 
 const BooksSection = () => {
   const {
@@ -31,6 +33,8 @@ const BooksSection = () => {
     };
     fetchBooks();
   }, [currentPage]);
+
+ 
 
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];
