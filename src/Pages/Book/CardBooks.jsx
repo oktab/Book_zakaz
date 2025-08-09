@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import useBooksStore from "../../store/useBooksStore";
 import useAuthStore from "../../store/auth";
-import { likeBookApi, deleteLikesApi, getLikesApi } from "../../api/auth"
+import { likeBookApi, deleteLikesApi, getLikesApi } from "../../api/auth";
 import { useEffect } from "react";
 
 const BookCard = ({ book, index }) => {
@@ -13,17 +13,14 @@ const BookCard = ({ book, index }) => {
     useEffect(() => {
         const fetchLikes = async () => {
             try {
-                const config = {
-                    headers: { Authorization: `Bearer ${token}` },
-                };
-                const res = await getLikesApi(config);
+                if (!token) return; // ⚠️ agar token yo'q bo‘lsa, layklarni olish shart emas
+                const res = await getLikesApi(token);
                 setLikes(res.data);
             } catch (error) {
                 console.error("Layklar olishda xatolik:", error);
             }
         };
-
-        if (token) fetchLikes();
+        fetchLikes();
     }, [token]);
 
     const existingLike = likes.find(
@@ -31,10 +28,14 @@ const BookCard = ({ book, index }) => {
     );
 
     const isLiked = Boolean(existingLike);
-
     const likeCount = likes.filter((like) => like.bookId === book.id).length;
 
     const handleLikeClick = async () => {
+        if (!token || !user) {
+            alert("Layk bosish uchun avval ro'yxatdan o'ting yoki login qiling.");
+            return;
+        }
+
         const config = {
             headers: { Authorization: `Bearer ${token}` },
         };
@@ -56,7 +57,6 @@ const BookCard = ({ book, index }) => {
             console.error("Layk bosishda xatolik:", error);
         }
     };
-
 
     return (
         <motion.div
@@ -88,7 +88,7 @@ const BookCard = ({ book, index }) => {
                         <span className="text-[14px]">{likeCount}</span>
                     </div>
                 </div>
-                <Link to={book.file}>
+                <Link to={book.file} target="_blank">
                     <button className="bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]">
                         Yuklab Olish
                     </button>

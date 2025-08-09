@@ -20,7 +20,6 @@ function Footer() {
             <div className="bg-[#1E3A8A] mt-[100px] rounded-tl-[50px] rounded-tr-[50px] h-[355px]">
                 <div className="max-w-[1177px] w-full mx-auto h-full">
                     <div className="flex items-center justify-between h-full">
-                        {/* Chap blok */}
                         <div>
                             <h1 className="text-3xl text-white font-bold">{t('footer_title')}</h1>
                             <div className="w-[304px] pt-[10px]">
@@ -29,15 +28,22 @@ function Footer() {
                                 </h1>
                             </div>
                             <div className="flex items-center pt-[20px] gap-4">
-                                <img src={insta} alt="Instagram" />
-                                <img src={telegram} alt="Telegram" />
-                                <img src={YouTube} alt="YouTube" />
-                                <img src={iks} alt="X" />
-                                <img src={FaceBook} alt="Facebook" />
+                                <Link to={"https://www.instagram.com/tuproqqala_takm/"} target='__blank'>
+                                    <img src={insta} alt="Instagram" />
+                                </Link>
+                                <Link to={"https://t.me/TuproqqalaTAKM/"} target='__blank'><img src={telegram} alt="Telegram" /></Link>
+                                <Link to={"https://www.youtube.com/@Tuproqqala_TAKM"} target='__blank'>
+                                    <img src={YouTube} alt="YouTube" />
+                                </Link>
+                                <Link to={"https://x.com/TuproqqalaTAKM"} target='__blank'>
+                                    <img src={iks} alt="X" />
+                                </Link>
+                                <Link to={"https://www.facebook.com/profile.php?id=61576717208165"} target='__blank'>
+                                    <img src={FaceBook} alt="Facebook" />
+                                </Link>
                             </div>
                         </div>
 
-                        {/* O'rta blok */}
                         <div>
                             <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/">{t('home')}</Link></li>
                             <li className="text-white text-3xl pt-[20px] cursor-pointer list-none"><Link to="/news">{t('news')}</Link></li>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 import { useTranslation } from 'react-i18next';
 import kutubxona from './../../assets/img/Rectangle 62.png';
 import card1 from './../../assets/img/Rectangle 63.png';
@@ -20,6 +21,23 @@ function Akm() {
             transition={{ duration: 0.6 }}
             className="pt-[120px]"
         >
+            <Helmet>
+                <title>{"Axborot-kutubxona markazi - Kutubxona haqida ma'lumot"}</title>
+                <meta
+                    name="description"
+                    content={"Axborot-kutubxona markazi haqida umumiy ma’lumot, suratlar va statistikalar bilan tanishing."}
+                />
+                <meta property="og:title" content={"Axborot-kutubxona markazi"} />
+                <meta
+                    property="og:description"
+                    content={"Kutubxona haqida batafsil ma’lumotlar va rasmli galereyani ushbu sahifada topasiz."}
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content={kutubxona} />
+                <meta property="og:url" content="https://tuproqqala-takm.uz/akm" />
+                <link rel="canonical" href="https://tuproqqala-takm.uz/akm" />
+            </Helmet>
+
             <div className="">
                 <div className="mx-auto max-w-[1240px]">
                     <nav className='mt-[30px]'>

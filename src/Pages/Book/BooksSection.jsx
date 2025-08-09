@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
+import { useState, useEffect } from 'react';
 import BookCard from '../Book/CardBooks';
 import BooksFilter from '../Book/BooksFilter';
 import Pagination from '../../Components/pogination/pogination';
 import useBooksStore from '../../store/useBooksStore';
-import useAuthStore from '../../store/auth';
-import { getLikesApi } from '../../api/auth';
 
 const BooksSection = () => {
   const {
@@ -34,7 +33,6 @@ const BooksSection = () => {
     fetchBooks();
   }, [currentPage]);
 
- 
 
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];
@@ -48,7 +46,16 @@ const BooksSection = () => {
 
   return (
     <section>
-      <div className='mx-auto w-[1230px] mt-[40px]'>
+
+      <Helmet>
+        <title>Kitoblar | Kutubxona</title>
+        <meta name="description" content="Saytimizdagi barcha elektron kitoblarni shu sahifada ko‘rishingiz mumkin. Kategoriya, til va nom bo‘yicha saralash mumkin." />
+        <meta property="og:title" content={"Kitoblar"} />
+        <meta property="og:url" content="https://tuproqqala-takm.uz/books" />
+        <link rel="canonical" href="https://tuproqqala-takm.uz/books" />
+      </Helmet>
+
+      <div className='mx-auto w-[1230px] mt-[10%]'>
         <h2 className='text-[48px] font-[600] text-center mb-[20px]'>KITOBLAR</h2>
         <BooksFilter
           searchTerm={searchTerm}

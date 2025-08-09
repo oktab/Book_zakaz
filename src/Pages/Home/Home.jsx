@@ -11,8 +11,6 @@ const Home = () => {
 
     return (
         <>
-
-            {/* MAIN */}
             <main className="pt-[119px]">
                 <AnimatePresence mode="sync">
                     <motion.section

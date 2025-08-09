@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { FaUser } from "react-icons/fa";
-
+import { Helmet } from 'react-helmet';
 import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
 import uzb from './../../assets/img/uzb.png';
@@ -67,13 +67,6 @@ const Header = () => {
   };
 
   const handleLogoutUser = async () => {
-    if (!token) {
-      console.warn("Token mavjud emas. To‘g‘ridan-to‘g‘ri chiqish.");
-      logout();
-      navigate("/signin");
-      return;
-    }
-
     try {
       const res = await logoutUser({}, {
         headers: {
@@ -94,75 +87,85 @@ const Header = () => {
         logout();
         navigate("/signin");
       } else {
-        alert("Sahifadan chiqishda xatolik: " + message);
+        console.log("Sahifadan chiqishda xatolik: " + message);
       }
     }
   };
 
   return (
-    <header className="bg-[#1E3A8A] py-5 fixed top-0 w-full z-50 shadow-md flex items-center">
-      <div className="max-w-[1230px] mx-auto w-full flex justify-between items-center text-white font-inter">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="cursor-pointer"
+    <>
+      <Helmet>
+        <title>Tuproqqal’a Axborot kutubxona markazi</title>
+        <meta name="description" content="Tuproqqal’a tumani Axborot kutubxona markazining rasmiy veb-sahifasi. Yangiliklar, kitoblar, AKM haqida ma’lumotlar." />
+        <meta name="keywords" content="Tuproqqal’a, kutubxona, kitoblar, yangiliklar, AKM, O‘zbekiston kutubxonalari" />
+        <meta property="og:url" content="https://tuproqqala-takm.uz" />
+        <link rel="canonical" href="https://tuproqqala-takm.uz" />
+      </Helmet>
+      <header className="bg-[#1E3A8A] py-5 fixed top-0 w-full z-50 shadow-md flex items-center">
+        <div className="max-w-[1230px] mx-auto w-full flex justify-between items-center text-white font-inter">
+          <div className="flex items-center gap-2">
+            <Link to="/">
+              <img
+                src={logo}
+                alt="Logo"
+                className="cursor-pointer"
+              />
+            </Link>
+            <h1 className="text-2xl leading-tight w-[210px]">
+              Tuproqqal’a tumani Axborot kutubxona markazi
+            </h1>
+          </div>
+
+          <ul className="flex gap-8 text-2xl font-bold items-center">
+            <li><Link to="/">{t('home')}</Link></li>
+            <li><Link to="/news">{t('news')}</Link></li>
+            <li><Link to="/books">{t('books')}</Link></li>
+            <li>
+              <select
+                id="bolim"
+                name="bolim"
+                value={selectedOption}
+                onChange={handleSelectChange}
+                className="text-white text-2xl font-inter bg-blue-900 rounded focus:outline-none"
+              >
+                <option value="" disabled hidden>{t('malumot')}</option>
+                <option value="rahbariyat">{t('rahbariyat')}</option>
+                <option value="akm">{t('akm')}</option>
+              </select>
+            </li>
+          </ul>
+
+          <div className="min-w-[160px]">
+            <Select
+              options={langOptions}
+              defaultValue={langOptions.find(opt => opt.value === i18n.language)}
+              onChange={(selectedOption) => i18n.changeLanguage(selectedOption.value)}
+              className="text-black font-inter"
+              isSearchable={false}
+              styles={{
+                control: (base) => ({ ...base, backgroundColor: '#1E3A8A', borderColor: 'white', color: 'white' }),
+                singleValue: (base) => ({ ...base, color: 'white' }),
+                menu: (base) => ({ ...base, backgroundColor: '#1E3A8A', color: 'white' }),
+                option: (base, state) => ({
+                  ...base,
+                  backgroundColor: state.isFocused ? '#3B82F6' : '#1E3A8A',
+                  color: 'white',
+                  cursor: 'pointer'
+                }),
+              }}
             />
-          </Link>
-          <h1 className="text-2xl leading-tight w-[210px]">
-            Tuproqqal’a tumani Axborot kutubxona markazi
-          </h1>
-        </div>
+          </div>
 
-        <ul className="flex gap-8 text-2xl font-bold items-center">
-          <li><Link to="/">{t('home')}</Link></li>
-          <li><Link to="/news">{t('news')}</Link></li>
-          <li><Link to="/books">{t('books')}</Link></li>
-          <li>
-            <select
-              id="bolim"
-              name="bolim"
-              value={selectedOption}
-              onChange={handleSelectChange}
-              className="text-white text-2xl font-inter bg-blue-900 rounded focus:outline-none"
-            >
-              <option value="" disabled hidden>{t('malumot')}</option>
-              <option value="rahbariyat">{t('rahbariyat')}</option>
-              <option value="akm">{t('akm')}</option>
-            </select>
-          </li>
-        </ul>
-
-        <div className="min-w-[160px]">
-          <Select
-            options={langOptions}
-            defaultValue={langOptions.find(opt => opt.value === i18n.language)}
-            onChange={(selectedOption) => i18n.changeLanguage(selectedOption.value)}
-            className="text-black font-inter"
-            isSearchable={false}
-            styles={{
-              control: (base) => ({ ...base, backgroundColor: '#1E3A8A', borderColor: 'white', color: 'white' }),
-              singleValue: (base) => ({ ...base, color: 'white' }),
-              menu: (base) => ({ ...base, backgroundColor: '#1E3A8A', color: 'white' }),
-              option: (base, state) => ({
-                ...base,
-                backgroundColor: state.isFocused ? '#3B82F6' : '#1E3A8A',
-                color: 'white',
-                cursor: 'pointer'
-              }),
-            }}
-          />
+          <div className='w-[50px] h-[50px] border rounded-[10px] flex justify-center items-center'>
+            {/* <Link to="/signin"><FaUser /></Link> */}
+            <button onClick={handleLogoutUser}>
+              <FaUser />
+            </button>
+          </div>
         </div>
+      </header>
+    </>
 
-        <div className='w-[50px] h-[50px] border rounded-[10px] flex justify-center items-center'>
-          {/* <Link to="/signin"><FaUser /></Link> */}
-          <button onClick={handleLogoutUser}>
-            <FaUser />
-          </button>
-        </div>
-      </div>
-    </header>
   );
 };
 

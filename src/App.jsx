@@ -14,41 +14,13 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-        }>
-          <Route index element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          } />
-          <Route path="/news" element={
-            <ProtectedRoute>
-              <News />
-            </ProtectedRoute>
-          } />
-          <Route path="/news/info/:id" element={
-            <ProtectedRoute>
-              <NewFull />
-            </ProtectedRoute>
-          } />
-          <Route path="/books" element={
-            <ProtectedRoute>
-              <BooksSection />
-            </ProtectedRoute>
-          } />
-          <Route path="/managment" element={
-            <ProtectedRoute>
-              <Rahbariat />
-            </ProtectedRoute>
-          } />
-          <Route path="/akm" element={
-            <ProtectedRoute>
-              <Akm />
-            </ProtectedRoute>
-          } />
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/news/info/:id" element={<NewFull />} />
+          <Route path="/books" element={<BooksSection />} />
+          <Route path="/managment" element={<Rahbariat />} />
+          <Route path="/akm" element={<Akm />} />
         </Route>
         <Route path="/signin" element={<ModernLogin />} />
       </Routes >
