@@ -15,7 +15,7 @@ function News() {
   const limit = 8;
 
   useEffect(() => {
-    setLoading(true); // loading start
+    setLoading(true);
     const newsApi = `https://lib.qaxramonov.uz/api/v1/news/get/all?page=${currentPage}&limit=${limit}`;
     fetch(newsApi)
       .then((response) => {
@@ -36,7 +36,7 @@ function News() {
         console.error('Xatolik:', error);
       })
       .finally(() => {
-        setLoading(false); // loading end
+        setLoading(false);
       });
   }, [currentPage, i18n.language]);
 
