@@ -16,8 +16,6 @@ const useBooksStore = create((set) => ({
     setBooks: (books) => set({ books }),
     setTotalPages: (totalPages) => set({ totalPages }),
     setCurrentPage: (page) => set({ currentPage: page }),
-
-
 }));
 
 export default useBooksStore;
