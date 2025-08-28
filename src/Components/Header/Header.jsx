@@ -47,10 +47,14 @@ const Header = () => {
   const location = useLocation();
   const [selectedOption, setSelectedOption] = useState('');
 
-  const { logout, token } = useAuthStore.getState()
+  const { logout, token } = useAuthStore.getState();
 
   useEffect(() => {
-    if (location.pathname !== '/akm' && location.pathname !== '/managment') {
+    if (location.pathname === '/akm') {
+      setSelectedOption('akm');
+    } else if (location.pathname === '/managment') {
+      setSelectedOption('rahbariyat');
+    } else {
       setSelectedOption('');
     }
   }, [location.pathname]);
@@ -105,11 +109,7 @@ const Header = () => {
         <div className="max-w-[1230px] mx-auto w-full flex justify-between items-center text-white font-inter">
           <div className="flex items-center gap-2">
             <Link to="/">
-              <img
-                src={logo}
-                alt="Logo"
-                className="cursor-pointer"
-              />
+              <img src={logo} alt="Logo" className="cursor-pointer" />
             </Link>
             <h1 className="text-2xl leading-tight w-[210px]">
               Tuproqqal’a tumani Axborot kutubxona markazi
@@ -157,7 +157,6 @@ const Header = () => {
           </div>
 
           <div className='w-[50px] h-[50px] border rounded-[10px] flex justify-center items-center'>
-            {/* <Link to="/signin"><FaUser /></Link> */}
             <button onClick={handleLogoutUser}>
               <FaUser />
             </button>
@@ -165,7 +164,6 @@ const Header = () => {
         </div>
       </header>
     </>
-
   );
 };
 

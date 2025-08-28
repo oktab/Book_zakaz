@@ -71,7 +71,7 @@ const BookCard = ({ book, index }) => {
             <img src={book.image} alt={book.title} className="rounded-[10px] w-full object-contain h-52" />
             <div className="pl-[8px]">
                 <h2 className="text-[20px] text-[#202020] font-[700]">{book.title}</h2>
-                <div className="flex justify-between mt-[15px] items-center">
+                <div className="flex justify-between mt-[15px] items-center ">
                     <div>
                         <p>Formati: {book.format}</p>
                         <p>Kitob betlari soni: {book.pages}</p>
@@ -89,7 +89,7 @@ const BookCard = ({ book, index }) => {
                     </div>
                 </div>
                 <Link to={book.file} target="_blank">
-                    <button className="bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px]">
+                    <button className="bg-[#098C81] text-white rounded-[10px] w-[271px] h-[60px] text-[24px] font-[600] mt-[15px] cursor-pointer">
                         Yuklab Olish
                     </button>
                 </Link>

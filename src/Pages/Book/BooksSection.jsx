@@ -34,7 +34,6 @@ const BooksSection = () => {
   }, [currentPage]);
 
 
-
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];
 
