@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import kutubxona from './../../assets/img/Rectangle 62.png';
 import card1 from './../../assets/img/Rectangle 63.png';

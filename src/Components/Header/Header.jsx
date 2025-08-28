@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Select from 'react-select';
 import { useTranslation } from 'react-i18next';
 import { FaUser } from "react-icons/fa";
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import eng from './../../assets/img/eng.png';
 import rus from './../../assets/img/rus.png';
 import uzb from './../../assets/img/uzb.png';
