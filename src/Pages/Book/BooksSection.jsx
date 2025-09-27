@@ -1,13 +1,28 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { IoMdHeartEmpty } from "react-icons/io";
 import Pagination from '../../Components/pogination/pogination';
 import { motion } from 'framer-motion';
+=======
+import { Helmet } from 'react-helmet';
+import { useState, useEffect } from 'react';
+import BookCard from '../Book/CardBooks';
+import BooksFilter from '../Book/BooksFilter';
+import Pagination from '../../Components/pogination/pogination';
+import useBooksStore from '../../store/useBooksStore';
 
-function BooksSection() {
-  const [books, setBooks] = useState([]);
+const BooksSection = () => {
+  const {
+    books, setBooks,
+    totalPages, setTotalPages,
+    currentPage, setCurrentPage,
+  } = useBooksStore();
+>>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
+
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedLanguage, setSelectedLanguage] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
+<<<<<<< HEAD
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -24,10 +39,26 @@ function BooksSection() {
       console.error('Xatolik:', error);
     }
   };
+=======
+>>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
 
   useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const res = await fetch(`https://lib.qaxramonov.uz/api/v1/admin/books/getBooks/all?page=${currentPage}&limit=8`);
+        const data = await res.json();
+        console.log(data);
+
+        setBooks(data.data);
+        setTotalPages(data.totalPages);
+
+      } catch (error) {
+        console.error('Xatolik:', error);
+      }
+    };
     fetchBooks();
   }, [currentPage]);
+
 
   const categories = ['All', ...new Set(books.map(book => book.category))];
   const languages = ['All', ...new Set(books.map(book => book.language))];
@@ -41,8 +72,18 @@ function BooksSection() {
 
   return (
     <section>
-      <div className='mx-auto w-[1230px] mt-[40px]'>
+
+      <Helmet>
+        <title>Kitoblar | Kutubxona</title>
+        <meta name="description" content="Saytimizdagi barcha elektron kitoblarni shu sahifada ko‘rishingiz mumkin. Kategoriya, til va nom bo‘yicha saralash mumkin." />
+        <meta property="og:title" content={"Kitoblar"} />
+        <meta property="og:url" content="https://tuproqqala-takm.uz/books" />
+        <link rel="canonical" href="https://tuproqqala-takm.uz/books" />
+      </Helmet>
+
+      <div className='mx-auto w-[1230px] mt-[10%]'>
         <h2 className='text-[48px] font-[600] text-center mb-[20px]'>KITOBLAR</h2>
+<<<<<<< HEAD
         <div className='w-[1230px] h-[50px] flex justify-between'>
           <input
             type="text"
@@ -81,12 +122,25 @@ function BooksSection() {
             ))}
           </select>
         </div>
+=======
+        <BooksFilter
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
+          categories={categories}
+          languages={languages}
+        />
+>>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
       </div>
 
       <div className='mx-auto flex flex-wrap gap-[10px] w-[1230px] mt-[35px]'>
 
         {filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
+<<<<<<< HEAD
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
@@ -117,10 +171,17 @@ function BooksSection() {
           ))
         ) : (
           <p className='text-center w-full text-xl mt-10'></p>
+=======
+            <BookCard key={book.id} book={book} index={index} />
+          ))
+        ) : (
+          <p className='text-center w-full text-xl mt-10'>Kitoblar topilmadi.</p>
+>>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
         )}
       </div>
 
       <div className="flex w-[1230px] mx-auto justify-end mt-[30px]">
+<<<<<<< HEAD
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
       </div>
     </section>
@@ -128,5 +189,16 @@ function BooksSection() {
 
 
 }
+=======
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+        />
+      </div>
+    </section>
+  );
+};
+>>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
 
 export default BooksSection;
