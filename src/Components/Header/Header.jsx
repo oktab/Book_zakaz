@@ -97,22 +97,6 @@ const Header = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <header className="bg-[#1E3A8A] h-[119px] fixed top-0 w-full z-50 shadow-md flex items-center">
-      <div className="max-w-[1177px] mx-auto w-full flex justify-between items-center text-white font-inter">
-        <div className="flex items-center gap-2">
-          <Link to="/">
-            <img
-              src={logo}
-              alt="Logo"
-              className="cursor-pointer" // тоже можно для стиля
-            />
-          </Link>
-          <h1 className="text-2xl leading-tight">
-            Tuproqqal’a tumani <br /> Axborot kutubxona <br /> markazi
-          </h1>
-        </div>
-=======
     <>
       <Helmet>
         <title>Tuproqqal’a Axborot kutubxona markazi</title>
@@ -131,7 +115,6 @@ const Header = () => {
               Tuproqqal’a tumani Axborot kutubxona markazi
             </h1>
           </div>
->>>>>>> b666f75fd4c0003370e906e59efad7dc9a7c71b6
 
           <ul className="flex gap-8 text-2xl font-bold items-center">
             <li><Link to="/">{t('home')}</Link></li>
