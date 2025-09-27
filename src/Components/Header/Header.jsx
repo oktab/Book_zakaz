@@ -17,7 +17,7 @@ const langOptions = [
     label: (
       <div className="flex items-center gap-2">
         <img src={uzb} alt="O'zbekcha" className="w-6 h-6 rounded-full" />
-        <span>O’zbekча</span>
+        <span>O’zbek</span>
       </div>
     )
   },
